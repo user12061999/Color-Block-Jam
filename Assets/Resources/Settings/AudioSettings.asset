@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af62506848309d45941881a08db2cac, type: 3}
   m_Name: AudioSettings
   m_EditorClassIdentifier: 
-  fadeSpeed: 1
+  fadeSpeed: 0.1
   saveId: audio
   ambient: {fileID: 6516458009290269036, guid: 0457cc3493181724f9c7471267a0ee58, type: 3}
   music: {fileID: 4864735547555749173, guid: 71d0708282440764bbdd6ba1b4899227, type: 3}
