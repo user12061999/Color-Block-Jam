@@ -144,6 +144,8 @@ MonoBehaviour:
   blockCollisionMask:
     serializedVersion: 2
     m_Bits: 128
+  colorData: {fileID: 11400000, guid: 99b52704360f04241be5d88d256c1e1a, type: 2}
+  renderer: {fileID: 6047946727751159124}
 --- !u!65 &3966565048821264597
 BoxCollider:
   m_ObjectHideFlags: 0

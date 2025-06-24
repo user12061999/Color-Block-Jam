@@ -1,3 +1,4 @@
+using HAVIGAME;
 using UnityEngine;
 
 public class BlockShape : MonoBehaviour
@@ -21,10 +22,18 @@ public class BlockShape : MonoBehaviour
 
     private float originalZ;
     private Vector3 targetPosition;
+    [Header("Color Data")]
+    public BlockColorData colorData;
+
+    public Renderer renderer;
 
     private void Start()
     {
         grid = FindObjectOfType<GridManager>();
+        if (colorData != null)
+        {
+            renderer.material = colorData.material;
+        }
     }
 
     private void Update()
@@ -155,13 +164,13 @@ public class BlockShape : MonoBehaviour
         Vector3 mouseWorld = GetMouseWorldByRay() + dragOffset;
         mouseWorld.z = dragZ;
         targetPosition = mouseWorld;
+        
     }
 
     private void OnMouseUp()
     {
         isDragging = false;
         grid.ClearAllPreviews();
-
         if (hasPreview && grid.CanPlaceBlock(previewOrigin, this))
         {
             grid.MoveBlockTo(this, previewOrigin);
@@ -178,11 +187,11 @@ public class BlockShape : MonoBehaviour
                 if (grid.IsValid(pos)) grid.SetOccupied(pos, true);
             }
         }
-
         // Hạ z
         Vector3 final = transform.position;
         final.z = originalZ;
         transform.position = final;
+        
     }
 
     private Vector3 GetMouseWorldByRay()
