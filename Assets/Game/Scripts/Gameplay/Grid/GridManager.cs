@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GridManager : MonoBehaviour
 {
@@ -30,19 +32,16 @@ public class GridManager : MonoBehaviour
     private void Awake()
     {
         //shape.EnsureInitialized();
-        validCellPositions = shape.ToVector2IntList();
-        cellMap.Clear();
-        foreach (Transform child in cellParent)
-            Destroy(child.gameObject);
-
-        foreach (var pos in validCellPositions)
-        {
-            Vector3 worldPos = new Vector3(pos.x * cellSize, pos.y * cellSize, 0f);
-            Cell cell = Instantiate(cellPrefab, worldPos, Quaternion.identity, cellParent);
-            cell.Init(pos);
-            cellMap[pos] = cell;
-        }
+        GenerateGrid();
     }
+
+    private void Start()
+    {
+        SpawnOneBlocksOnGrid();
+        SpawnOneBlocksOnGrid();
+       
+    }
+
     public void SetPreviewAt(Vector2Int origin, BlockShape block, bool valid)
     {
         foreach (var offset in block.occupiedOffsets)
@@ -71,8 +70,8 @@ public class GridManager : MonoBehaviour
     }
     public void GenerateGrid()
     {
+        validCellPositions = shape.ToVector2IntList();
         cellMap.Clear();
-
         foreach (Transform child in cellParent)
             Destroy(child.gameObject);
 
@@ -314,7 +313,6 @@ public class GridManagerEditor : Editor
         if (grid.shape == null)
             return;
 
-        // Đảm bảo dữ liệu khởi tạo đúng (nhưng không reset)
         grid.shape.EnsureInitialized();
 
         EditorGUILayout.Space(10);
@@ -323,7 +321,6 @@ public class GridManagerEditor : Editor
         int width = grid.shape.width;
         int height = grid.shape.height;
 
-        // Lưới toggle từ trên xuống
         for (int y = height - 1; y >= 0; y--)
         {
             EditorGUILayout.BeginHorizontal();
@@ -344,12 +341,10 @@ public class GridManagerEditor : Editor
 
         EditorGUILayout.Space();
 
-        // Nút resize
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Resize Grid"))
         {
             Undo.RecordObject(grid, "Resize Grid");
-
             grid.shape.Resize(grid.shape.width, grid.shape.height);
             EditorUtility.SetDirty(grid);
         }
@@ -357,10 +352,22 @@ public class GridManagerEditor : Editor
         if (GUILayout.Button("Clear All"))
         {
             Undo.RecordObject(grid, "Clear Grid");
-
             grid.shape.Resize(grid.shape.width, grid.shape.height);
             EditorUtility.SetDirty(grid);
         }
         EditorGUILayout.EndHorizontal();
+
+        // ✅ Nút Create Grid
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("Grid Operations", EditorStyles.boldLabel);
+
+        if (GUILayout.Button("Create Grid"))
+        {
+            GridManager gridManager = (GridManager)target;
+            Undo.RecordObject(gridManager, "Create Grid");
+            gridManager.GenerateGrid();
+            EditorUtility.SetDirty(gridManager);
+        }
     }
+
 }

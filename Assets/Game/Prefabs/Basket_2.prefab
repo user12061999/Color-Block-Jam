@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6888253522008260093}
   - component: {fileID: 8419018121673287871}
   - component: {fileID: 6047946727751159124}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Basket_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 3966565048821264597}
   - component: {fileID: 5818311785695667779}
   - component: {fileID: 1084759050368041448}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Basket_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,12 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 1, y: 1}
-  cellSize: 2
+  speed: 10
+  dragZ: -0.3
+  boxCastHalfExtents: {x: 0.45, y: 0.45, z: 0.1}
+  blockCollisionMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!65 &3966565048821264597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -158,8 +163,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 2, z: 2}
-  m_Center: {x: 1, y: 0, z: 0}
+  m_Size: {x: 3.8, y: 1.9, z: 2}
+  m_Center: {x: 1, y: 0, z: -1}
 --- !u!65 &5818311785695667779
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,8 +184,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 1}
-  m_Center: {x: 2, y: 2, z: 0}
+  m_Size: {x: 1.9, y: 1.9, z: 2}
+  m_Center: {x: 2, y: 2, z: -1}
 --- !u!54 &1084759050368041448
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -189,9 +194,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2875431969223075666}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 1e+9
+  m_Drag: 5
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -206,5 +211,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0

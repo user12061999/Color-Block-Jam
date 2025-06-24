@@ -114,7 +114,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8413303887502412496}
   - component: {fileID: 4253730856079108502}
-  m_Layer: 0
+  - component: {fileID: 2289280038026710289}
+  m_Layer: 6
   m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,3 +155,24 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: 9181fd2fb6f27664b801073227bccfaa, type: 2}
   greenMaterial: {fileID: 2100000, guid: bdf0dd3cb1a6fa34185186e1908d9a93, type: 2}
   meshRenderer: {fileID: 86079701959509613}
+--- !u!65 &2289280038026710289
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263859778869073482}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9, y: 1.9, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
