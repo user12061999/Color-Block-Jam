@@ -138,12 +138,15 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
   - {x: 1, y: 1}
-  speed: 10
+  speed: 40
   dragZ: -0.3
   boxCastHalfExtents: {x: 0.45, y: 0.45, z: 0.1}
   blockCollisionMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
+  wallCollisionMask:
+    serializedVersion: 2
+    m_Bits: 0
   colorData: {fileID: 11400000, guid: 99b52704360f04241be5d88d256c1e1a, type: 2}
   renderer: {fileID: 6047946727751159124}
 --- !u!65 &3966565048821264597
@@ -166,7 +169,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 3.8, y: 1.9, z: 2}
-  m_Center: {x: 1, y: 0, z: -1}
+  m_Center: {x: 1, y: 0, z: 0}
 --- !u!65 &5818311785695667779
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -187,7 +190,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.9, y: 1.9, z: 2}
-  m_Center: {x: 2, y: 2, z: -1}
+  m_Center: {x: 2, y: 2, z: 0}
 --- !u!54 &1084759050368041448
 Rigidbody:
   m_ObjectHideFlags: 0

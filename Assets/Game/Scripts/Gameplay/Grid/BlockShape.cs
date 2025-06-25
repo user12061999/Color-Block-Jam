@@ -18,12 +18,11 @@ public class BlockShape : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] private float dragZ = -0.3f;
     [SerializeField] private Vector3 boxCastHalfExtents = new Vector3(0.45f, 0.45f, 0.1f);
-    [SerializeField] private LayerMask blockCollisionMask;
+    [SerializeField] private LayerMask blockCollisionMask, wallCollisionMask;
 
     private float originalZ;
     private Vector3 targetPosition;
-    [Header("Color Data")]
-    public BlockColorData colorData;
+    [Header("Color Data")] public BlockColorData colorData;
 
     public Renderer renderer;
 
@@ -158,13 +157,57 @@ public class BlockShape : MonoBehaviour
     }
 
     private void OnMouseDrag()
-    {
-        if (!isDragging) return;
+{
+    if (!isDragging) return;
 
-        Vector3 mouseWorld = GetMouseWorldByRay() + dragOffset;
-        mouseWorld.z = dragZ;
+    Vector3 mouseWorld = GetMouseWorldByRay() + dragOffset;
+    mouseWorld.z = dragZ;
+
+    // Chuyển đổi vị trí con trỏ sang vị trí trong grid
+    Vector2Int gridPos = grid.WorldToGrid(mouseWorld);
+
+    if (grid.IsValid(gridPos))
+    {
         targetPosition = mouseWorld;
-        
+    }
+    else
+    {
+        // Tìm vị trí hợp lệ gần nhất trên biên grid theo hướng con trỏ
+        Vector2Int nearestEdgePos = FindNearestEdgePosition(gridPos, mouseWorld);
+        targetPosition = grid.GridToWorld(nearestEdgePos) + new Vector3(0, 0, dragZ);
+    }
+}
+
+private Vector2Int FindNearestEdgePosition(Vector2Int invalidPos, Vector3 mouseWorld)
+{
+    Vector2Int nearestEdgePos = invalidPos;
+    float minDistance = float.MaxValue;
+
+    foreach (var cellPos in grid.GetAllValidCells())
+    {
+        // Chỉ xét các vị trí nằm trên biên grid
+        if (IsOnGridEdge(cellPos))
+        {
+            Vector3 cellWorldPos = grid.GridToWorld(cellPos);
+            float distance = Vector3.Distance(cellWorldPos, mouseWorld);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearestEdgePos = cellPos;
+            }
+        }
+    }
+
+    return nearestEdgePos;
+}
+
+    private bool IsOnGridEdge(Vector2Int pos)
+    {
+        // Kiểm tra nếu vị trí nằm trên biên grid
+        return !grid.IsValid(new Vector2Int(pos.x - 1, pos.y)) ||
+               !grid.IsValid(new Vector2Int(pos.x + 1, pos.y)) ||
+               !grid.IsValid(new Vector2Int(pos.x, pos.y - 1)) ||
+               !grid.IsValid(new Vector2Int(pos.x, pos.y + 1));
     }
 
     private void OnMouseUp()
@@ -187,11 +230,11 @@ public class BlockShape : MonoBehaviour
                 if (grid.IsValid(pos)) grid.SetOccupied(pos, true);
             }
         }
+
         // Hạ z
         Vector3 final = transform.position;
         final.z = originalZ;
         transform.position = final;
-        
     }
 
     private Vector3 GetMouseWorldByRay()

@@ -80,22 +80,27 @@ public class BlockCutter : MonoBehaviour
 
     private bool IsOccluded(Vector3 targetPos, BlockShape self)
     {
-        Vector3 origin = transform.position + Quaternion.Euler(boxRotation) * boxCenterOffset;
-        Vector3 dir = targetPos - origin;
-        float dist = dir.magnitude;
+        Vector3 cutterPos = transform.position;
 
-        if (Physics.Raycast(origin, dir.normalized, out RaycastHit hit, dist, blockLayer))
+        foreach (var offset in self.occupiedOffsets)
         {
-            BlockShape hitBlock = hit.collider.GetComponentInParent<BlockShape>();
-            if (hitBlock != null && hitBlock != self)
+            Vector3 worldPos = grid.GridToWorld(self.CurrentOrigin + offset);
+            Vector3 direction = cutterDirection.GetVector();
+            float distance = 7;
+
+            // Raycast từ từng khối nhỏ của BlockShape
+            if (Physics.Raycast(worldPos, direction, out RaycastHit hit, distance, blockLayer))
             {
-                Debug.DrawRay(origin, dir, Color.red, 0.2f);
-                return true;
+                BlockShape hitBlock = hit.collider.GetComponentInParent<BlockShape>();
+                if (hitBlock != null && hitBlock != self && hitBlock.colorData.colorType != colorData.colorType)
+                {
+                    Debug.DrawRay(worldPos, direction * distance, Color.red, 1f);
+                    return true; // Bị chặn bởi khối khác màu
+                }
             }
         }
 
-        Debug.DrawRay(origin, dir, Color.green, 0.2f);
-        return false;
+        return false; // Không bị chặn
     }
 
     private void CutBlock(BlockShape block)

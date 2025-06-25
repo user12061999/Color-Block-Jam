@@ -50,12 +50,15 @@ MonoBehaviour:
   occupiedOffsets:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
-  speed: 10
+  speed: 40
   dragZ: -0.3
   boxCastHalfExtents: {x: 0.45, y: 0.45, z: 0.1}
   blockCollisionMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
+  wallCollisionMask:
+    serializedVersion: 2
+    m_Bits: 0
   colorData: {fileID: 11400000, guid: 9d776e22a7afd8a438055a835b9f8174, type: 2}
   renderer: {fileID: 5526588759099206961}
 --- !u!65 &7920046535446335674
@@ -77,7 +80,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 4, z: 1}
+  m_Size: {x: 2, y: 4, z: 4}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &4822849708730407535
 Rigidbody:
