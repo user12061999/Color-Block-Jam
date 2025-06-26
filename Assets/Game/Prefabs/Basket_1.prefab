@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7846581527344038658}
   - component: {fileID: 7335562134844988131}
   - component: {fileID: 4336501645841208501}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Basket_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,8 +134,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   occupiedOffsets:
   - {x: 0, y: 0}
-  centerPosition: {x: 0, y: 0}
-  cellSize: 2
+  speed: 40
+  dragZ: 0
+  boxCastHalfExtents: {x: 0.45, y: 0.45, z: 0.1}
+  blockCollisionMask:
+    serializedVersion: 2
+    m_Bits: 384
+  colorData: {fileID: 0}
+  renderer: {fileID: 1011330885922089762}
 --- !u!65 &4336501645841208501
 BoxCollider:
   m_ObjectHideFlags: 0

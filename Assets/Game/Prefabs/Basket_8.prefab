@@ -51,14 +51,10 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
   speed: 40
-  dragZ: -0.3
   boxCastHalfExtents: {x: 0.45, y: 0.45, z: 0.1}
   blockCollisionMask:
     serializedVersion: 2
     m_Bits: 384
-  wallCollisionMask:
-    serializedVersion: 2
-    m_Bits: 0
   colorData: {fileID: 11400000, guid: 9d776e22a7afd8a438055a835b9f8174, type: 2}
   renderer: {fileID: 5526588759099206961}
 --- !u!65 &7920046535446335674
@@ -173,7 +169,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fde3e706efdd36144968d7afcdfeae22, type: 2}
+  - {fileID: 2100000, guid: e11231b8d5bd7e2448a1a3ac25c0e8c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

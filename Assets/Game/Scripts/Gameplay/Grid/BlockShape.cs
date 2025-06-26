@@ -1,4 +1,5 @@
 using HAVIGAME;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlockShape : MonoBehaviour
@@ -15,10 +16,10 @@ public class BlockShape : MonoBehaviour
     private bool hasPreview = false;
     private bool isDragging = false;
 
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float dragZ = -0.3f;
+    [SerializeField] private float speed = 40f;
+    [SerializeField] private float dragZ =>transform.position.z;
     [SerializeField] private Vector3 boxCastHalfExtents = new Vector3(0.45f, 0.45f, 0.1f);
-    [SerializeField] private LayerMask blockCollisionMask, wallCollisionMask;
+    [SerializeField] private LayerMask blockCollisionMask;
 
     private float originalZ;
     private Vector3 targetPosition;
@@ -28,13 +29,42 @@ public class BlockShape : MonoBehaviour
 
     private void Start()
     {
+        this.gameObject.AddComponent<BoxCollider>();
         grid = FindObjectOfType<GridManager>();
         if (colorData != null)
         {
             renderer.material = colorData.material;
         }
     }
-
+    private void OnValidate()
+    {
+        if (colorData)
+        {
+            renderer.material = colorData.material;
+        }
+    }
+[ContextMenu("auto-create box collider")]
+    public void AutoCreateBoxCollider()
+    {
+        foreach (var VARIABLE in occupiedOffsets)
+        {
+            BoxCollider cache = this.AddComponent<BoxCollider>();
+            cache.size= Vector3.one*2;
+            cache.center = new Vector3(VARIABLE.x, VARIABLE.y, 0) * 2;
+        }
+        Rigidbody rigidbody =this.AddComponent<Rigidbody>();
+        rigidbody.useGravity = false;
+        rigidbody.isKinematic= true;
+        renderer = GetComponentInChildren<Renderer>();
+    }
+    public void SetColorData(BlockColorData data)
+    {
+        colorData = data;
+        if (renderer != null && colorData != null)
+        {
+            renderer.material = colorData.material;
+        }
+    }
     private void Update()
     {
         if (!isDragging) return;
@@ -162,7 +192,6 @@ public class BlockShape : MonoBehaviour
 
     Vector3 mouseWorld = GetMouseWorldByRay() + dragOffset;
     mouseWorld.z = dragZ;
-
     // Chuyển đổi vị trí con trỏ sang vị trí trong grid
     Vector2Int gridPos = grid.WorldToGrid(mouseWorld);
 

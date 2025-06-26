@@ -37,9 +37,7 @@ public class GridManager : MonoBehaviour
 
     private void Start()
     {
-        SpawnOneBlocksOnGrid();
-        SpawnOneBlocksOnGrid();
-       
+
     }
 
     public void SetPreviewAt(Vector2Int origin, BlockShape block, bool valid)
@@ -286,6 +284,7 @@ public class GridManager : MonoBehaviour
                 if (CanPlaceBlock(origin, prefab))
                 {
                     BlockShape newBlock = Instantiate(prefab, blockParent);
+                    newBlock.SetColorData(ColorConfig.Instance.blockColorDatas[Random.Range(0, ColorConfig.Instance.blockColorDatas.Length)]);
                     PlaceBlock(origin, newBlock); // Tự căn giữa và mark occupied
                     placed = true;
                     break;

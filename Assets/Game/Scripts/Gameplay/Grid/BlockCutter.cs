@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -29,7 +30,19 @@ public class BlockCutter : MonoBehaviour
 
         InvokeRepeating(nameof(CheckAndCut), 0f, checkInterval);
     }
+    private void OnValidate()
+    {
+        if (colorData)
+        {
+            SetColorData();
+        }
+    }
 
+    [ContextMenu("Set Color Data")]
+    public void SetColorData()
+    {
+        renderer.material = colorData.material;
+    }
     private void CheckAndCut()
     {
         Quaternion rotation = Quaternion.Euler(boxRotation);
