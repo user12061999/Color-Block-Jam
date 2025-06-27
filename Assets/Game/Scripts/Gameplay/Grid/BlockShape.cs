@@ -1,3 +1,4 @@
+using System.Linq;
 using HAVIGAME;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -82,17 +83,19 @@ public class BlockShape : MonoBehaviour
         float totalDist = toTarget.magnitude;
         if (totalDist < 0.01f) return;
 
-        float step = speed * Time.fixedDeltaTime;
+        float step = speed * Time.deltaTime;
         float moveDist = Mathf.Min(step, totalDist);
 
+        
+        
         // Ưu tiên trục Y
         Vector3 yDir = new Vector3(0, toTarget.y, 0);
         if (yDir.magnitude > 0.01f)
         {
             Vector3 moveDirY = yDir.normalized;
             float moveY = Mathf.Min(moveDist, Mathf.Abs(yDir.y));
-
-            if (!CheckCollision(moveDirY, moveY))
+           
+            if (!CheckSlide(moveDirY, moveY))
             {
                 transform.position += moveDirY * moveY;
                 moveDist -= moveY;
@@ -101,8 +104,8 @@ public class BlockShape : MonoBehaviour
                          Quaternion.identity, moveY, blockCollisionMask))
             {
                 Vector3 slideDir = Vector3.ProjectOnPlane(moveDirY, hitY.normal).normalized;
-                if (!CheckSlide(slideDir, moveY))
-                    transform.position += slideDir * moveY;
+                    if (!CheckSlide(slideDir, moveY))
+                        transform.position += slideDir * moveY;
             }
         }
 
@@ -112,8 +115,8 @@ public class BlockShape : MonoBehaviour
         {
             Vector3 moveDirX = xDir.normalized;
             float moveX = Mathf.Min(moveDist, Mathf.Abs(xDir.x));
-
-            if (!CheckCollision(moveDirX, moveX))
+            
+            if (!CheckSlide(moveDirX, moveX))
             {
                 transform.position += moveDirX * moveX;
             }
@@ -141,26 +144,12 @@ public class BlockShape : MonoBehaviour
             hasPreview = true;
         }
 
-        //grid.ClearAllPreviews();
+        grid.ClearAllPreviews();
         if (hasPreview)
         {
-            //grid.SetPreviewAt(previewOrigin, this, grid.CanPlaceBlock(previewOrigin, this));
+            grid.SetPreviewAt(previewOrigin, this, grid.CanPlaceBlock(previewOrigin, this));
         }
     }
-
-    private bool CheckCollision(Vector3 moveDir, float moveDist)
-    {
-        foreach (var offset in occupiedOffsets)
-        {
-            Vector3 pos = transform.position + new Vector3(offset.x, offset.y, 0) * grid.cellSize;
-            if (Physics.BoxCast(pos, boxCastHalfExtents, moveDir, out _, Quaternion.identity, moveDist,
-                    blockCollisionMask))
-                return true;
-        }
-
-        return false;
-    }
-
     private bool CheckSlide(Vector3 slideDir, float moveDist)
     {
         foreach (var offset in occupiedOffsets)
@@ -181,7 +170,10 @@ public class BlockShape : MonoBehaviour
         originalGridPos = CurrentOrigin;
         dragOffset = transform.position - GetMouseWorldByRay();
         originalZ = transform.position.z;
-
+        foreach (var VARIABLE in boxColliders)
+        {
+            VARIABLE.enabled = false;
+        }
         // Gỡ mark occupied
         foreach (var offset in occupiedOffsets)
         {
@@ -252,6 +244,10 @@ private Vector2Int FindNearestEdgePosition(Vector2Int invalidPos, Vector3 mouseW
     {
         isDragging = false;
         grid.ClearAllPreviews();
+        foreach (var VARIABLE in boxColliders)
+        {
+            VARIABLE.enabled = true;
+        }
         if (hasPreview && grid.CanPlaceBlock(previewOrigin, this))
         {
             grid.MoveBlockTo(this, previewOrigin);
