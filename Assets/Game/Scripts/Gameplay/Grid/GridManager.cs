@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -295,6 +296,56 @@ public class GridManager : MonoBehaviour
             {
                 Debug.LogWarning($"Không thể đặt block #{i} - Không đủ chỗ.");
             }
+        }
+    }
+    [ContextMenu("Simulate Cut")]
+    public void SimulateCut()
+    {
+        // Lấy tất cả block hiện tại trên lưới
+        BlockShape[] blocks = FindObjectsOfType<BlockShape>();
+
+        if (blocks.Length == 0)
+        {
+            Debug.LogWarning("Không tìm thấy khối nào để mô phỏng cắt.");
+            return;
+        }
+
+        // Chọn một block bất kỳ
+        BlockShape targetBlock = blocks[Random.Range(0, blocks.Length)];
+
+        // Tạo mặt phẳng cắt giả lập đi qua tâm block
+        Vector3 blockWorldPos = targetBlock.transform.position;
+        Plane cuttingPlane = new Plane(Random.insideUnitSphere, blockWorldPos); // mặt phẳng ngang
+
+        // Chuyển sang hệ tọa độ cục bộ của block
+        Vector3 localNormal = targetBlock.transform.InverseTransformDirection(cuttingPlane.normal);
+        Vector3 localPosition = targetBlock.transform.InverseTransformPoint(blockWorldPos);
+        Plane localPlane = new Plane(localNormal, localPosition);
+
+        // Cắt vật thể
+        GameObject[] slices = Slicer.Slice(localPlane, targetBlock.gameObject);
+
+        if (slices != null && slices.Length > 0)
+        {
+            // Hủy nửa đầu tiên (tùy chọn)
+            /*if (slices[0] != null)
+            {
+                DestroyImmediate(slices[0]);
+            }*/
+
+            // Thêm lực đẩy nhẹ cho nửa còn lại
+            if (slices[1] != null)
+            {
+                Rigidbody rb = slices[1].GetComponent<Rigidbody>();
+                if (rb == null)
+                    rb = slices[1].AddComponent<Rigidbody>();
+
+                rb.AddForce(cuttingPlane.normal * 5, ForceMode.Impulse);
+            }
+        }
+        else
+        {
+            Debug.Log("Không thể cắt khối đã chọn.");
         }
     }
 }

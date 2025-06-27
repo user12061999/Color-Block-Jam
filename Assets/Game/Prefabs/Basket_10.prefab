@@ -119,7 +119,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.98, y: 0.98, z: 0.98}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 852787880257095675}
@@ -144,12 +144,11 @@ MonoBehaviour:
   - {x: 1, y: 2}
   - {x: 0, y: 2}
   speed: 40
-  dragZ: 0
   boxCastHalfExtents: {x: 0.45, y: 0.45, z: 0.1}
   blockCollisionMask:
     serializedVersion: 2
     m_Bits: 384
-  colorData: {fileID: 0}
+  colorData: {fileID: 11400000, guid: 99b52704360f04241be5d88d256c1e1a, type: 2}
   renderer: {fileID: 8580411992987449977}
 --- !u!65 &2650570502837873266
 BoxCollider:

@@ -15,7 +15,8 @@ public class BlockCutter : MonoBehaviour
 
     [Header("Color Cutter Config")]
     public BlockColorData colorData;
-    public Renderer renderer;
+    public Renderer renderer,renderer2,backgroundRenderer;
+    public ParticleSystem[] cutParticles;
 
     [Header("Cutter Pull Settings")]
     public Direction cutterDirection;
@@ -25,10 +26,8 @@ public class BlockCutter : MonoBehaviour
         if (grid == null)
             grid = FindObjectOfType<GridManager>();
 
-        if (renderer != null && colorData != null)
-            renderer.material = colorData.material;
-
-        InvokeRepeating(nameof(CheckAndCut), 0f, checkInterval);
+        SetColorData();
+        //InvokeRepeating(nameof(CheckAndCut), 0f, checkInterval);
     }
     private void OnValidate()
     {
@@ -37,11 +36,38 @@ public class BlockCutter : MonoBehaviour
             SetColorData();
         }
     }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        BlockShape block = other.GetComponentInParent<BlockShape>();
+        if (block != null)
+        {
+            Quaternion rotation = Quaternion.Euler(boxRotation);
+            Vector3 center = transform.position + rotation * boxCenterOffset;
 
+            if (IsFullyInside(block, center, rotation) && CanCut(block) && !block.IsCutting)
+            {
+                block.IsCutting = true;
+                CutBlock(block);
+            }
+            else
+            {
+                Debug.Log($"❌ Không thể cắt {block.name} vì màu không khớp hoặc không nằm hoàn toàn trong vùng cắt.");
+            }
+        }
+    }
     [ContextMenu("Set Color Data")]
     public void SetColorData()
     {
-        renderer.material = colorData.material;
+        if (renderer != null && colorData != null)
+        {
+            renderer.material = colorData.material;
+            renderer2.material = colorData.material;
+            foreach (var VARIABLE in cutParticles)
+            {
+                VARIABLE.GetComponent<Renderer>().material = colorData.material;
+            }
+        }
     }
     private void CheckAndCut()
     {
@@ -139,12 +165,14 @@ public class BlockCutter : MonoBehaviour
         }
 
         destination.z = block.transform.position.z;
-
+        float rendererZ = renderer.transform.position.z;
         // Tween di chuyển
+        renderer.transform.DOMoveZ(rendererZ + 1, 0.2f);
         block.transform.DOMove(destination, 0.35f)
             .SetEase(Ease.Linear)
             .OnComplete(() =>
             {
+                renderer.transform.DOMoveZ(rendererZ, 0.2f);
                 foreach (var off in block.occupiedOffsets)
                 {
                     Vector2Int pos = block.CurrentOrigin + off;

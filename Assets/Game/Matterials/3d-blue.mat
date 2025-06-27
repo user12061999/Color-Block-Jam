@@ -167,6 +167,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _STexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ScanlinesTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -316,11 +320,13 @@ Material:
     - _RampSmooth: 0.2
     - _RampSmoothAdd: 0.75
     - _RampSmoothDir: 0.5
+    - _RampSmoothOtherLights: 0.5
     - _RampSmoothPoint: 0.5
     - _RampSmoothSpot: 0.5
     - _RampSmoothing: 0.1
     - _RampThreshold: 0.75
     - _RampThresholdDir: 0.5
+    - _RampThresholdOtherLights: 0.5
     - _RampThresholdPoint: 0.5
     - _RampThresholdSpot: 0.5
     - _RampType: 0
@@ -406,6 +412,7 @@ Material:
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0, g: 0.27434108, b: 1, a: 1}
     - _DepthColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _DiffTint: {r: 0.7, g: 0.8, b: 1, a: 1}
     - _DissolveGradientTexture: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveMap_SC: {r: 1, g: 1, b: 0, a: 0}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
