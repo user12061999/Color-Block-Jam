@@ -4461,6 +4461,9 @@ MonoBehaviour:
   checkInterval: 0.2
   colorData: {fileID: 11400000, guid: 9d776e22a7afd8a438055a835b9f8174, type: 2}
   renderer: {fileID: 7830084573297413501}
+  renderer2: {fileID: 0}
+  backgroundRenderer: {fileID: 0}
+  cutParticles: []
   cutterDirection:
     direction: 2
 --- !u!1 &4403050435481888162
@@ -8939,7 +8942,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0f37e87491c1e5b48a0529cdc8754ab0, type: 2}
+  - {fileID: 2100000, guid: e11231b8d5bd7e2448a1a3ac25c0e8c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

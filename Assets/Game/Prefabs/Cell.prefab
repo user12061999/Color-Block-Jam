@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3464299283002268821}
   - component: {fileID: 1626968731062397187}
   - component: {fileID: 8526508925598506458}
-  - component: {fileID: 8351676480512822924}
   m_Layer: 0
   m_Name: Cell (2)
   m_TagString: Untagged
@@ -87,23 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8351676480512822924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3092945707086193024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bee5dc77d100d6043a081b702fa71e0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseMaterial: {fileID: 0}
-  hightlightMaterial: {fileID: 0}
-  redMaterial: {fileID: 0}
-  greenMaterial: {fileID: 0}
-  meshRenderer: {fileID: 0}
 --- !u!1 &6263859778869073482
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +170,6 @@ GameObject:
   - component: {fileID: 1831205355195418352}
   - component: {fileID: 6388631932904157296}
   - component: {fileID: 6141101169000337000}
-  - component: {fileID: 8313925146718743411}
   m_Layer: 0
   m_Name: Cell (1)
   m_TagString: Untagged
@@ -264,20 +245,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8313925146718743411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6539280101787240648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bee5dc77d100d6043a081b702fa71e0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseMaterial: {fileID: 0}
-  hightlightMaterial: {fileID: 0}
-  redMaterial: {fileID: 0}
-  greenMaterial: {fileID: 0}
-  meshRenderer: {fileID: 0}

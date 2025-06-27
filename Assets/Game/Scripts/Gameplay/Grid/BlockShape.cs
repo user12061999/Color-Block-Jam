@@ -74,7 +74,7 @@ public class BlockShape : MonoBehaviour
             renderer.material = colorData.material;
         }
     }
-    private void Update()
+    private void LateUpdate()
     {
         if (!isDragging) return;
 
@@ -82,7 +82,7 @@ public class BlockShape : MonoBehaviour
         float totalDist = toTarget.magnitude;
         if (totalDist < 0.01f) return;
 
-        float step = speed * Time.deltaTime;
+        float step = speed * Time.fixedDeltaTime;
         float moveDist = Mathf.Min(step, totalDist);
 
         // Ưu tiên trục Y
@@ -141,10 +141,10 @@ public class BlockShape : MonoBehaviour
             hasPreview = true;
         }
 
-        grid.ClearAllPreviews();
+        //grid.ClearAllPreviews();
         if (hasPreview)
         {
-            grid.SetPreviewAt(previewOrigin, this, grid.CanPlaceBlock(previewOrigin, this));
+            //grid.SetPreviewAt(previewOrigin, this, grid.CanPlaceBlock(previewOrigin, this));
         }
     }
 

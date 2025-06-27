@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Assets.Scripts;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -38,7 +36,7 @@ public class GridManager : MonoBehaviour
 
     private void Start()
     {
-
+        Application.targetFrameRate = 60;
     }
 
     public void SetPreviewAt(Vector2Int origin, BlockShape block, bool valid)
@@ -298,126 +296,5 @@ public class GridManager : MonoBehaviour
             }
         }
     }
-    [ContextMenu("Simulate Cut")]
-    public void SimulateCut()
-    {
-        // Lấy tất cả block hiện tại trên lưới
-        BlockShape[] blocks = FindObjectsOfType<BlockShape>();
-
-        if (blocks.Length == 0)
-        {
-            Debug.LogWarning("Không tìm thấy khối nào để mô phỏng cắt.");
-            return;
-        }
-
-        // Chọn một block bất kỳ
-        BlockShape targetBlock = blocks[Random.Range(0, blocks.Length)];
-
-        // Tạo mặt phẳng cắt giả lập đi qua tâm block
-        Vector3 blockWorldPos = targetBlock.transform.position;
-        Plane cuttingPlane = new Plane(Random.insideUnitSphere, blockWorldPos); // mặt phẳng ngang
-
-        // Chuyển sang hệ tọa độ cục bộ của block
-        Vector3 localNormal = targetBlock.transform.InverseTransformDirection(cuttingPlane.normal);
-        Vector3 localPosition = targetBlock.transform.InverseTransformPoint(blockWorldPos);
-        Plane localPlane = new Plane(localNormal, localPosition);
-
-        // Cắt vật thể
-        GameObject[] slices = Slicer.Slice(localPlane, targetBlock.gameObject);
-
-        if (slices != null && slices.Length > 0)
-        {
-            // Hủy nửa đầu tiên (tùy chọn)
-            /*if (slices[0] != null)
-            {
-                DestroyImmediate(slices[0]);
-            }*/
-
-            // Thêm lực đẩy nhẹ cho nửa còn lại
-            if (slices[1] != null)
-            {
-                Rigidbody rb = slices[1].GetComponent<Rigidbody>();
-                if (rb == null)
-                    rb = slices[1].AddComponent<Rigidbody>();
-
-                rb.AddForce(cuttingPlane.normal * 5, ForceMode.Impulse);
-            }
-        }
-        else
-        {
-            Debug.Log("Không thể cắt khối đã chọn.");
-        }
-    }
 }
 
-
-[CustomEditor(typeof(GridManager))]
-public class GridManagerEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-
-        GridManager grid = (GridManager)target;
-
-        if (grid.shape == null)
-            return;
-
-        grid.shape.EnsureInitialized();
-
-        EditorGUILayout.Space(10);
-        EditorGUILayout.LabelField("Grid Layout Editor", EditorStyles.boldLabel);
-
-        int width = grid.shape.width;
-        int height = grid.shape.height;
-
-        for (int y = height - 1; y >= 0; y--)
-        {
-            EditorGUILayout.BeginHorizontal();
-            for (int x = 0; x < width; x++)
-            {
-                bool current = grid.shape.Get(x, y);
-                bool changed = GUILayout.Toggle(current, "", GUILayout.Width(20), GUILayout.Height(20));
-
-                if (changed != current)
-                {
-                    Undo.RecordObject(grid, "Toggle Cell");
-                    grid.shape.Set(x, y, changed);
-                    EditorUtility.SetDirty(grid);
-                }
-            }
-            EditorGUILayout.EndHorizontal();
-        }
-
-        EditorGUILayout.Space();
-
-        EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Resize Grid"))
-        {
-            Undo.RecordObject(grid, "Resize Grid");
-            grid.shape.Resize(grid.shape.width, grid.shape.height);
-            EditorUtility.SetDirty(grid);
-        }
-
-        if (GUILayout.Button("Clear All"))
-        {
-            Undo.RecordObject(grid, "Clear Grid");
-            grid.shape.Resize(grid.shape.width, grid.shape.height);
-            EditorUtility.SetDirty(grid);
-        }
-        EditorGUILayout.EndHorizontal();
-
-        // ✅ Nút Create Grid
-        EditorGUILayout.Space();
-        EditorGUILayout.LabelField("Grid Operations", EditorStyles.boldLabel);
-
-        if (GUILayout.Button("Create Grid"))
-        {
-            GridManager gridManager = (GridManager)target;
-            Undo.RecordObject(gridManager, "Create Grid");
-            gridManager.GenerateGrid();
-            EditorUtility.SetDirty(gridManager);
-        }
-    }
-
-}

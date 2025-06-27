@@ -29,14 +29,6 @@ public class BlockCutter : MonoBehaviour
         SetColorData();
         //InvokeRepeating(nameof(CheckAndCut), 0f, checkInterval);
     }
-    private void OnValidate()
-    {
-        if (colorData)
-        {
-            SetColorData();
-        }
-    }
-    
     private void OnTriggerStay(Collider other)
     {
         BlockShape block = other.GetComponentInParent<BlockShape>();
