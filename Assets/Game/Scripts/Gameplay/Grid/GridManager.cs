@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -36,6 +37,7 @@ public class GridManager : MonoBehaviour
         //shape.EnsureInitialized();
         GenerateGrid();
     }
+    
 
     private void Start()
     {
@@ -310,6 +312,15 @@ public class GridManager : MonoBehaviour
             {
                 Debug.LogWarning($"Không thể đặt block #{i} - Không đủ chỗ.");
             }
+        }
+    }
+    [ContextMenu("Set Occupied")]
+    public void SetOrccupied()
+    {
+        foreach (Transform VARIABLE in blockParent)
+        {
+            Vector2Int origin = WorldToGrid(VARIABLE.transform.position);
+            PlaceBlock(origin,VARIABLE.GetComponent<BlockShape>());
         }
     }
 }
