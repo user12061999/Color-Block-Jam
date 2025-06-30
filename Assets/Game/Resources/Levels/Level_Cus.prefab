@@ -1712,9 +1712,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2838570782824423913}
+  - component: {fileID: 5577628829992106110}
   - component: {fileID: 1874374825116540591}
   - component: {fileID: 4105969512929262799}
-  - component: {fileID: 5577628829992106110}
   - component: {fileID: 1183657314318284016}
   - component: {fileID: 6473307235380807633}
   m_Layer: 0
@@ -1740,40 +1740,6 @@ Transform:
   - {fileID: 2236639255276748842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1874374825116540591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2263787465268663896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 629e542b10a8b0c4aad477d9405a88e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 0}
-  child: {fileID: 0}
-  timer: {fileID: 1183657314318284016}
-  generator: {fileID: 6473307235380807633}
-  gridManager: {fileID: 5577628829992106110}
---- !u!114 &4105969512929262799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2263787465268663896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ef197f4fa49f9c45b2dd20690c6ebbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridManager: {fileID: 5577628829992106110}
-  calculateOnStart: 1
-  gridBounds:
-    m_Center: {x: 4, y: 5, z: 0}
-    m_Extent: {x: 5, y: 6, z: 0}
 --- !u!114 &5577628829992106110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1829,6 +1795,40 @@ MonoBehaviour:
   - {fileID: 3278961939651270962, guid: 892a6fa41a306124abee30866865e4c4, type: 3}
   numberToSpawn: 1
   blockParent: {fileID: 3524406531724447034}
+--- !u!114 &1874374825116540591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263787465268663896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629e542b10a8b0c4aad477d9405a88e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  child: {fileID: 0}
+  timer: {fileID: 1183657314318284016}
+  generator: {fileID: 6473307235380807633}
+  gridManager: {fileID: 5577628829992106110}
+--- !u!114 &4105969512929262799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263787465268663896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef197f4fa49f9c45b2dd20690c6ebbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridManager: {fileID: 5577628829992106110}
+  calculateOnStart: 1
+  gridBounds:
+    m_Center: {x: 4, y: 5, z: 0}
+    m_Extent: {x: 5, y: 6, z: 0}
 --- !u!114 &1183657314318284016
 MonoBehaviour:
   m_ObjectHideFlags: 0
