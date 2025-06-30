@@ -59,6 +59,7 @@ MonoBehaviour:
   boxColliders:
   - {fileID: 7920046535446335674}
   - {fileID: 5442505638186585976}
+  outLine: {fileID: 0}
   colorData: {fileID: 11400000, guid: 99b52704360f04241be5d88d256c1e1a, type: 2}
   renderer: {fileID: 5526588759099206961}
 --- !u!65 &7920046535446335674
@@ -194,7 +195,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e11231b8d5bd7e2448a1a3ac25c0e8c9, type: 2}
+  - {fileID: 2100000, guid: 3b41708368277644a853854baabb0d1a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

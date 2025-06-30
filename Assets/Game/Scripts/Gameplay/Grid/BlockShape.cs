@@ -19,10 +19,11 @@ public class BlockShape : MonoBehaviour
     public bool IsCutting { get; set; } = false;
 
     [SerializeField] private float speed = 40f;
-    [SerializeField] private float dragZ =>transform.position.z;
+    [SerializeField] private float dragZ => transform.position.z;
     [SerializeField] private Vector3 boxCastHalfExtents = new Vector3(0.45f, 0.45f, 0.1f);
     [SerializeField] private LayerMask blockCollisionMask;
     [SerializeField] private BoxCollider[] boxColliders;
+    [SerializeField] private GameObject outLine;
 
     private float originalZ;
     private Vector3 targetPosition;
@@ -39,23 +40,23 @@ public class BlockShape : MonoBehaviour
             renderer.material = colorData.material;
         }
     }
-    /*private void OnValidate()
+    private void OnValidate()
     {
         if (colorData)
         {
             renderer.material = colorData.material;
         }
-    }*/
-[ContextMenu("auto-create box collider")]
+    }
+    [ContextMenu("auto-create box collider")]
     public void AutoCreateBoxCollider()
     {
         boxColliders = GetComponents<BoxCollider>();
         for (int i = 0; i < occupiedOffsets.Length; i++)
         {
-            boxColliders[i].size=Vector3.one * 2;
-            boxColliders[i].center=new Vector2(occupiedOffsets[i].x,occupiedOffsets[i].y) * 2;
+            boxColliders[i].size = Vector3.one * 2;
+            boxColliders[i].center = new Vector2(occupiedOffsets[i].x, occupiedOffsets[i].y) * 2;
         }
-        
+
         /*foreach (var VARIABLE in occupiedOffsets)
         {
             BoxCollider cache = this.AddComponent<BoxCollider>();
@@ -66,6 +67,25 @@ public class BlockShape : MonoBehaviour
         rigidbody.useGravity = false;
         rigidbody.isKinematic= true;
         renderer = GetComponentInChildren<Renderer>();*/
+    }
+    public void OnSelected()
+    {
+        // if (renderer == null) return;
+        // renderer.material.SetFloat("_OutlineWidth", 2.5f);
+        if (outLine != null)
+        {
+            outLine.SetActive(true);
+        }
+    }
+
+    public void OnDeselected()
+    {
+        // if (renderer == null) return;
+        // renderer.material.SetFloat("_OutlineWidth", 0.0f);
+        if (outLine != null)
+        {
+            outLine.SetActive(false);
+        }
     }
     public void SetColorData(BlockColorData data)
     {
@@ -86,15 +106,15 @@ public class BlockShape : MonoBehaviour
         float step = speed * Time.deltaTime;
         float moveDist = Mathf.Min(step, totalDist);
 
-        
-        
+
+
         // Ưu tiên trục Y
         Vector3 yDir = new Vector3(0, toTarget.y, 0);
         if (yDir.magnitude > 0.01f)
         {
             Vector3 moveDirY = yDir.normalized;
             float moveY = Mathf.Min(moveDist, Mathf.Abs(yDir.y));
-           
+
             if (!CheckSlide(moveDirY, moveY))
             {
                 transform.position += moveDirY * moveY;
@@ -104,8 +124,8 @@ public class BlockShape : MonoBehaviour
                          Quaternion.identity, moveY, blockCollisionMask))
             {
                 Vector3 slideDir = Vector3.ProjectOnPlane(moveDirY, hitY.normal).normalized;
-                    if (!CheckSlide(slideDir, moveY))
-                        transform.position += slideDir * moveY;
+                if (!CheckSlide(slideDir, moveY))
+                    transform.position += slideDir * moveY;
             }
         }
 
@@ -115,7 +135,7 @@ public class BlockShape : MonoBehaviour
         {
             Vector3 moveDirX = xDir.normalized;
             float moveX = Mathf.Min(moveDist, Mathf.Abs(xDir.x));
-            
+
             if (!CheckSlide(moveDirX, moveX))
             {
                 transform.position += moveDirX * moveX;
@@ -166,6 +186,7 @@ public class BlockShape : MonoBehaviour
     private void OnMouseDown()
     {
         isDragging = true;
+        OnSelected();
         originalPosition = transform.position;
         originalGridPos = CurrentOrigin;
         dragOffset = transform.position - GetMouseWorldByRay();
@@ -188,48 +209,48 @@ public class BlockShape : MonoBehaviour
     }
 
     private void OnMouseDrag()
-{
-    if (!isDragging) return;
-
-    Vector3 mouseWorld = GetMouseWorldByRay() + dragOffset;
-    mouseWorld.z = dragZ;
-    // Chuyển đổi vị trí con trỏ sang vị trí trong grid
-    Vector2Int gridPos = grid.WorldToGrid(mouseWorld);
-
-    if (grid.IsValid(gridPos))
     {
-        targetPosition = mouseWorld;
-    }
-    else
-    {
-        // Tìm vị trí hợp lệ gần nhất trên biên grid theo hướng con trỏ
-        Vector2Int nearestEdgePos = FindNearestEdgePosition(gridPos, mouseWorld);
-        targetPosition = grid.GridToWorld(nearestEdgePos) + new Vector3(0, 0, dragZ);
-    }
-}
+        if (!isDragging) return;
 
-private Vector2Int FindNearestEdgePosition(Vector2Int invalidPos, Vector3 mouseWorld)
-{
-    Vector2Int nearestEdgePos = invalidPos;
-    float minDistance = float.MaxValue;
+        Vector3 mouseWorld = GetMouseWorldByRay() + dragOffset;
+        mouseWorld.z = dragZ;
+        // Chuyển đổi vị trí con trỏ sang vị trí trong grid
+        Vector2Int gridPos = grid.WorldToGrid(mouseWorld);
 
-    foreach (var cellPos in grid.GetAllValidCells())
-    {
-        // Chỉ xét các vị trí nằm trên biên grid
-        if (IsOnGridEdge(cellPos))
+        if (grid.IsValid(gridPos))
         {
-            Vector3 cellWorldPos = grid.GridToWorld(cellPos);
-            float distance = Vector3.Distance(cellWorldPos, mouseWorld);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                nearestEdgePos = cellPos;
-            }
+            targetPosition = mouseWorld;
+        }
+        else
+        {
+            // Tìm vị trí hợp lệ gần nhất trên biên grid theo hướng con trỏ
+            Vector2Int nearestEdgePos = FindNearestEdgePosition(gridPos, mouseWorld);
+            targetPosition = grid.GridToWorld(nearestEdgePos) + new Vector3(0, 0, dragZ);
         }
     }
 
-    return nearestEdgePos;
-}
+    private Vector2Int FindNearestEdgePosition(Vector2Int invalidPos, Vector3 mouseWorld)
+    {
+        Vector2Int nearestEdgePos = invalidPos;
+        float minDistance = float.MaxValue;
+
+        foreach (var cellPos in grid.GetAllValidCells())
+        {
+            // Chỉ xét các vị trí nằm trên biên grid
+            if (IsOnGridEdge(cellPos))
+            {
+                Vector3 cellWorldPos = grid.GridToWorld(cellPos);
+                float distance = Vector3.Distance(cellWorldPos, mouseWorld);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestEdgePos = cellPos;
+                }
+            }
+        }
+
+        return nearestEdgePos;
+    }
 
     private bool IsOnGridEdge(Vector2Int pos)
     {
@@ -243,6 +264,7 @@ private Vector2Int FindNearestEdgePosition(Vector2Int invalidPos, Vector3 mouseW
     private void OnMouseUp()
     {
         isDragging = false;
+        OnDeselected();
         grid.ClearAllPreviews();
         foreach (var VARIABLE in boxColliders)
         {

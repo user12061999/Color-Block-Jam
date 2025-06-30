@@ -56,13 +56,35 @@ public class GridManagerEditor : Editor
             grid.shape.Resize(grid.shape.width, grid.shape.height);
             EditorUtility.SetDirty(grid);
         }
+        if (GUILayout.Button("Tick All"))
+        {
+            for (int y = height - 1; y >= 0; y--)
+            {
+                EditorGUILayout.BeginHorizontal();
+                for (int x = 0; x < width; x++)
+                {
+                    bool changed = GUILayout.Toggle(true, "", GUILayout.Width(20), GUILayout.Height(20));
 
+
+                    grid.shape.Set(x, y, changed);
+                    EditorUtility.SetDirty(grid);
+                }
+
+                EditorGUILayout.EndHorizontal();
+            }
+        }
         EditorGUILayout.EndHorizontal();
 
         // ✅ Nút Create Grid
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Grid Operations", EditorStyles.boldLabel);
-
+        if (GUILayout.Button("Clear Grid"))
+        {
+            GridManager gridManager = (GridManager)target;
+            Undo.RecordObject(gridManager, "Clear Grid");
+            gridManager.ClearGrid();
+            EditorUtility.SetDirty(gridManager);
+        }
         if (GUILayout.Button("Create Grid"))
         {
             GridManager gridManager = (GridManager)target;

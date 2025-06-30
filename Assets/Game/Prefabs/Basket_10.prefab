@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fde3e706efdd36144968d7afcdfeae22, type: 2}
+  - {fileID: 2100000, guid: 3b41708368277644a853854baabb0d1a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,6 +148,8 @@ MonoBehaviour:
   blockCollisionMask:
     serializedVersion: 2
     m_Bits: 384
+  boxColliders: []
+  outLine: {fileID: 0}
   colorData: {fileID: 11400000, guid: 99b52704360f04241be5d88d256c1e1a, type: 2}
   renderer: {fileID: 8580411992987449977}
 --- !u!65 &2650570502837873266
