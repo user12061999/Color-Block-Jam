@@ -63,6 +63,7 @@ public class HomePanel : UITab {
 
     private void PlayGame() {
         int levelToPlay = currentLevel;
+        Debug.Log(levelToPlay);
         GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(levelToPlay);
         ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Game);
     }

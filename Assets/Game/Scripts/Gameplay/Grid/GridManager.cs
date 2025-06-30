@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class GridManager : MonoBehaviour
 
     [Header("Grid Holder")]
     [SerializeField] private Transform cellParent;
+    [SerializeField] public Transform CellParent => cellParent;
+    [SerializeField] public Transform BlockParent => blockParent;
 
     [Header("Kích thước mỗi ô")]
     [SerializeField]
@@ -51,6 +54,20 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public void SpawnSubBlock(BlockShape blockShape)
+    {
+        if (blockShape.SubBlockColorData)
+        {
+            Instantiate(blockShape, blockParent).SetColorData(
+                blockShape.SubBlockColorData);
+            PlaceBlock(blockShape.PreviewOrigin, blockShape);
+        }
+    }
+
+    public void OnCompleteCutBlock(Action callBack=null)
+    {
+        callBack?.Invoke();
+    }
     public void ClearAllPreviews()
     {
         foreach (var cell in cellMap.Values)
@@ -127,7 +144,6 @@ public class GridManager : MonoBehaviour
         Debug.Log($"Placing block at {origin} with offsets: {string.Join(", ", shape.occupiedOffsets)}");
         Vector3 worldPos = GridToWorld(origin); // Không trừ center nữa
         shape.transform.position = worldPos;
-
         shape.CurrentOrigin = origin;
     }
 

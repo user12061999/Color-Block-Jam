@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using HAVIGAME;
 using UnityEngine;
 
 public class BlockCutter : MonoBehaviour
@@ -40,12 +41,13 @@ public class BlockCutter : MonoBehaviour
             if (IsFullyInside(block, center, rotation) && CanCut(block) && !block.IsCutting)
             {
                 block.IsCutting = true;
-                CutBlock(block);
+                grid.SpawnSubBlock(block);
+                CutBlock(block, () =>
+                {
+                    EventDispatcher.Dispatch<GameEvent.DestroyBlockShape>(new GameEvent.DestroyBlockShape());
+                });
             }
-            else
-            {
-                Debug.Log($"❌ Không thể cắt {block.name} vì màu không khớp hoặc không nằm hoàn toàn trong vùng cắt.");
-            }
+            
         }
     }
     [ContextMenu("Set Color Data")]
@@ -79,7 +81,6 @@ public class BlockCutter : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log($"❌ Không thể cắt {block.name} vì màu không khớp: {block.colorData.colorType}");
                 }
             }
         }
@@ -134,7 +135,7 @@ public class BlockCutter : MonoBehaviour
         return false; // Không bị chặn
     }
 
-    private void CutBlock(BlockShape block)
+    private void CutBlock(BlockShape block,Action callBack=null)
     {
         Vector3 moveDirection = cutterDirection.GetVector3().normalized;
         float cellSize = grid.cellSize;
@@ -164,7 +165,10 @@ public class BlockCutter : MonoBehaviour
             .SetEase(Ease.Linear)
             .OnComplete(() =>
             {
-                renderer.transform.DOMoveZ(rendererZ, 0.2f);
+                renderer.transform.DOMoveZ(rendererZ, 0.2f).OnComplete(() =>
+                {
+                    callBack?.Invoke();
+                });
                 foreach (var off in block.occupiedOffsets)
                 {
                     Vector2Int pos = block.CurrentOrigin + off;

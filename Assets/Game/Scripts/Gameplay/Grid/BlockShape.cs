@@ -14,16 +14,28 @@ public class BlockShape : MonoBehaviour
     private Vector2Int originalGridPos;
 
     private Vector2Int previewOrigin;
+    public Vector2Int PreviewOrigin=>previewOrigin;
     private bool hasPreview = false;
     private bool isDragging = false;
     public bool IsCutting { get; set; } = false;
 
     [SerializeField] private float speed = 40f;
+    [SerializeField] private bool isLockX = false;
+    [SerializeField] private bool isLockY = false;
+    [SerializeField] private GameObject lockXObject;
+    [SerializeField] private GameObject lockYObject;
+    
+    
+    [SerializeField] private bool hasSubShape = false;
+    [SerializeField] private GameObject subObject;
+    [SerializeField] private BlockColorData subBlockColorData; 
+    public BlockColorData SubBlockColorData=>subBlockColorData;
+    
     [SerializeField] private float dragZ =>transform.position.z;
     [SerializeField] private Vector3 boxCastHalfExtents = new Vector3(0.45f, 0.45f, 0.1f);
     [SerializeField] private LayerMask blockCollisionMask;
     [SerializeField] private BoxCollider[] boxColliders;
-
+    
     private float originalZ;
     private Vector3 targetPosition;
     [Header("Color Data")] public BlockColorData colorData;
@@ -32,6 +44,7 @@ public class BlockShape : MonoBehaviour
 
     private void Start()
     {
+        OnStart();
         this.gameObject.AddComponent<BoxCollider>();
         grid = FindObjectOfType<GridManager>();
         if (colorData != null)
@@ -39,14 +52,59 @@ public class BlockShape : MonoBehaviour
             renderer.material = colorData.material;
         }
     }
-    /*private void OnValidate()
+
+    public void OnStart()
+    {
+        lockXObject.SetActive(isLockY);
+        lockYObject.SetActive(isLockX);
+        if (hasSubShape)
+        {
+            subObject.GetComponent<Renderer>().material = subBlockColorData.material;
+        }
+        subObject.SetActive(hasSubShape);
+    }
+[ContextMenu("OnCreate")]
+    public void OnCreate()
     {
         if (colorData)
         {
             renderer.material = colorData.material;
         }
-    }*/
-[ContextMenu("auto-create box collider")]
+        if (lockXObject==null)
+        {
+            lockXObject = transform.GetChild(1).gameObject;
+        }
+        if (lockYObject==null)
+        {
+            lockYObject = transform.GetChild(2).gameObject;
+        }
+        if (subObject==null)
+        {
+            subObject = transform.GetChild(3).gameObject;
+            var transform1 = renderer.transform;
+            subObject.transform.position = transform1.position;
+            var rotation = transform1.rotation;
+            subObject.transform.rotation = new Quaternion(rotation.x,
+                rotation.y, rotation.z, rotation.w);
+        }
+        OnStart();
+    }
+    private void OnValidate()
+    {
+        OnStart();
+    }
+    
+    public void OnCompleteDestroyBlock()
+    {
+        //EventDispatcher.Dispatch<GameEvent.DestroyBlockShape>(new GameEvent.DestroyBlockShape());
+        Debug.Log(" - Block destroyed: " + this.name);
+    }
+
+    public void OnCutting()
+    {
+        IsCutting = true;
+    }
+    [ContextMenu("auto-create box collider")]
     public void AutoCreateBoxCollider()
     {
         boxColliders = GetComponents<BoxCollider>();
@@ -86,48 +144,55 @@ public class BlockShape : MonoBehaviour
         float step = speed * Time.deltaTime;
         float moveDist = Mathf.Min(step, totalDist);
 
-        
-        
-        // Ưu tiên trục Y
-        Vector3 yDir = new Vector3(0, toTarget.y, 0);
-        if (yDir.magnitude > 0.01f)
+
+        if (!isLockY)
         {
-            Vector3 moveDirY = yDir.normalized;
-            float moveY = Mathf.Min(moveDist, Mathf.Abs(yDir.y));
+            // Ưu tiên trục Y
+            Vector3 yDir = new Vector3(0, toTarget.y, 0);
+            if (yDir.magnitude > 0.01f)
+            {
+                Vector3 moveDirY = yDir.normalized;
+                float moveY = Mathf.Min(moveDist, Mathf.Abs(yDir.y));
            
-            if (!CheckSlide(moveDirY, moveY))
-            {
-                transform.position += moveDirY * moveY;
-                moveDist -= moveY;
-            }
-            else if (Physics.BoxCast(transform.position, boxCastHalfExtents, moveDirY, out RaycastHit hitY,
-                         Quaternion.identity, moveY, blockCollisionMask))
-            {
-                Vector3 slideDir = Vector3.ProjectOnPlane(moveDirY, hitY.normal).normalized;
+                if (!CheckSlide(moveDirY, moveY))
+                {
+                    transform.position += moveDirY * moveY;
+                    moveDist -= moveY;
+                }
+                else if (Physics.BoxCast(transform.position, boxCastHalfExtents, moveDirY, out RaycastHit hitY,
+                             Quaternion.identity, moveY, blockCollisionMask))
+                {
+                    Vector3 slideDir = Vector3.ProjectOnPlane(moveDirY, hitY.normal).normalized;
                     if (!CheckSlide(slideDir, moveY))
                         transform.position += slideDir * moveY;
+                }
             }
         }
+        
 
-        // Sau đó mới di chuyển theo trục X
-        Vector3 xDir = new Vector3(toTarget.x, 0, 0);
-        if (xDir.magnitude > 0.01f)
+        if (!isLockX)
         {
-            Vector3 moveDirX = xDir.normalized;
-            float moveX = Mathf.Min(moveDist, Mathf.Abs(xDir.x));
+            // Sau đó mới di chuyển theo trục X
+            Vector3 xDir = new Vector3(toTarget.x, 0, 0);
+            if (xDir.magnitude > 0.01f)
+            {
+                Vector3 moveDirX = xDir.normalized;
+                float moveX = Mathf.Min(moveDist, Mathf.Abs(xDir.x));
             
-            if (!CheckSlide(moveDirX, moveX))
-            {
-                transform.position += moveDirX * moveX;
-            }
-            else if (Physics.BoxCast(transform.position, boxCastHalfExtents, moveDirX, out RaycastHit hitX,
-                         Quaternion.identity, moveX, blockCollisionMask))
-            {
-                Vector3 slideDir = Vector3.ProjectOnPlane(moveDirX, hitX.normal).normalized;
-                if (!CheckSlide(slideDir, moveX))
-                    transform.position += slideDir * moveX;
+                if (!CheckSlide(moveDirX, moveX))
+                {
+                    transform.position += moveDirX * moveX;
+                }
+                else if (Physics.BoxCast(transform.position, boxCastHalfExtents, moveDirX, out RaycastHit hitX,
+                             Quaternion.identity, moveX, blockCollisionMask))
+                {
+                    Vector3 slideDir = Vector3.ProjectOnPlane(moveDirX, hitX.normal).normalized;
+                    if (!CheckSlide(slideDir, moveX))
+                        transform.position += slideDir * moveX;
+                }
             }
         }
+        
 
         // Snap preview
         Vector2Int snapped = grid.WorldToGrid(transform.position);
