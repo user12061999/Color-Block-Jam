@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Color-blue
   m_EditorClassIdentifier: 
   colorType: 2
-  displayColor: {r: 0, g: 0.28865194, b: 1, a: 1}
+  displayColor: {r: 0.1764706, g: 0.8078432, b: 1, a: 1}
   material: {fileID: 2100000, guid: 3b41708368277644a853854baabb0d1a, type: 2}

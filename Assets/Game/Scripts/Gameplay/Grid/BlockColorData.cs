@@ -15,5 +15,8 @@ public enum ColorType
     Yellow,
     Purple,
     Orange,
+    Pink,
+    DarkBlue,
+    DarkGreen,
     // Thêm màu mới ở đây
 }

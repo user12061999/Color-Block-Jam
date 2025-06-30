@@ -16,7 +16,7 @@ public class BlockCutter : MonoBehaviour
 
     [Header("Color Cutter Config")]
     public BlockColorData colorData;
-    public Renderer renderer,renderer2,backgroundRenderer;
+    public Renderer renderer, renderer2, backgroundRenderer;
     public ParticleSystem[] cutParticles;
 
     [Header("Cutter Pull Settings")]
@@ -29,6 +29,13 @@ public class BlockCutter : MonoBehaviour
 
         SetColorData();
         //InvokeRepeating(nameof(CheckAndCut), 0f, checkInterval);
+    }
+    void OnValidate()
+    {
+        if (colorData)
+        {
+            renderer.material = colorData.material;
+        }
     }
     private void OnTriggerStay(Collider other)
     {

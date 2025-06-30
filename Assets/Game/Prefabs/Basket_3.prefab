@@ -164,6 +164,7 @@ MonoBehaviour:
   - {fileID: 147025009727659373}
   - {fileID: 929894214615315387}
   - {fileID: 6106727956099975799}
+  outLine: {fileID: 0}
   colorData: {fileID: 11400000, guid: 99b52704360f04241be5d88d256c1e1a, type: 2}
   renderer: {fileID: 4320834562292290071}
 --- !u!65 &4294194349048833078

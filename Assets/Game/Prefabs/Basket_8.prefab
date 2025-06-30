@@ -155,6 +155,7 @@ MonoBehaviour:
   boxColliders:
   - {fileID: 7920046535446335674}
   - {fileID: 5442505638186585976}
+  outLine: {fileID: 0}
   colorData: {fileID: 11400000, guid: 99b52704360f04241be5d88d256c1e1a, type: 2}
   renderer: {fileID: 5526588759099206961}
 --- !u!65 &7920046535446335674

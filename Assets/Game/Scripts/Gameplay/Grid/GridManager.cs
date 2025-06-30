@@ -12,7 +12,7 @@ public class GridManager : MonoBehaviour
     [Header("Grid Shape Editor")]
     [SerializeField]
     public SerializableBoolGrid shape = new SerializableBoolGrid();
-    
+
     [Header("Vị trí hợp lệ của các cell (Vector2Int)")]
     [SerializeField] private List<Vector2Int> validCellPositions;
 
@@ -26,7 +26,7 @@ public class GridManager : MonoBehaviour
     public float cellSize = 2f;
 
     private Dictionary<Vector2Int, Cell> cellMap = new Dictionary<Vector2Int, Cell>();
-    
+
     [Header("Cấu hình spawn")]
     [SerializeField] private List<BlockShape> blockPrefabs;
     [SerializeField] private int numberToSpawn = 5;
@@ -84,12 +84,15 @@ public class GridManager : MonoBehaviour
             cell.SetOccupied(value);
         }
     }
+    public void ClearGrid()
+    {
+        foreach (Transform child in cellParent) DestroyImmediate(child.gameObject);
+        cellMap.Clear();
+    }
     public void GenerateGrid()
     {
         validCellPositions = shape.ToVector2IntList();
-        cellMap.Clear();
-        foreach (Transform child in cellParent)
-            Destroy(child.gameObject);
+
 
         foreach (var pos in validCellPositions)
         {
@@ -136,7 +139,7 @@ public class GridManager : MonoBehaviour
     }
     public void PlaceBlock(Vector2Int origin, BlockShape shape)
     {
-        
+
         foreach (var offset in shape.occupiedOffsets)
         {
             Vector2Int pos = origin + offset;
@@ -180,9 +183,9 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-        
+
         if (shape == null || cellMap == null) return;
-        
+
 
         foreach (var pair in cellMap)
         {
@@ -249,7 +252,7 @@ public class GridManager : MonoBehaviour
     {
         return cellMap.Keys;
     }
-    
+
     [ContextMenu("Spawn One Blocks")]
     public void SpawnOneBlocksOnGrid()
     {
