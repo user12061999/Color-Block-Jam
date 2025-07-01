@@ -18,5 +18,6 @@ public enum ColorType
     Pink,
     DarkBlue,
     DarkGreen,
+    Turquoise,
     // Thêm màu mới ở đây
 }
