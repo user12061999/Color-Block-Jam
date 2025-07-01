@@ -66,7 +66,7 @@ MonoBehaviour:
   hasSubShape: 0
   subObject: {fileID: 5378849505681992250}
   subBlockColorData: {fileID: 0}
-  boxCastHalfExtents: {x: 0.45, y: 0.45, z: 0.1}
+  boxCastHalfExtents: {x: 0.8, y: 0.8, z: 0.8}
   blockCollisionMask:
     serializedVersion: 2
     m_Bits: 384
@@ -314,7 +314,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3806099399926057939}
-  m_Mesh: {fileID: 4300000, guid: 260a0dad41591eb4aa607a65dd5d4311, type: 2}
+  m_Mesh: {fileID: 4300000, guid: 8024679edd330cb418707eb5c7169d2c, type: 2}
 --- !u!23 &2079593539230362719
 MeshRenderer:
   m_ObjectHideFlags: 0

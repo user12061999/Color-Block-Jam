@@ -154,7 +154,7 @@ MonoBehaviour:
   hasSubShape: 0
   subObject: {fileID: 897553821856488665}
   subBlockColorData: {fileID: 0}
-  boxCastHalfExtents: {x: 0.45, y: 0.45, z: 0.1}
+  boxCastHalfExtents: {x: 0.8, y: 0.8, z: 0.8}
   blockCollisionMask:
     serializedVersion: 2
     m_Bits: 384
