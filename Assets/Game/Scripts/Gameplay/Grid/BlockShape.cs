@@ -45,7 +45,6 @@ public class BlockShape : MonoBehaviour
     private void Start()
     {
         OnStart();
-        this.gameObject.AddComponent<BoxCollider>();
         grid = FindObjectOfType<GridManager>();
         if (colorData != null)
         {
