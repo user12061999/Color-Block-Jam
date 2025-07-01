@@ -1479,7 +1479,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1488,7 +1488,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1968664631
+  m_SortingLayerID: -23672475
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &3048339686879528529
@@ -2007,11 +2007,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 696538010631939312, guid: da2e3f7794e6de448a8ebf0eaaf79121, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 696538010631939312, guid: da2e3f7794e6de448a8ebf0eaaf79121, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 696538010631939312, guid: da2e3f7794e6de448a8ebf0eaaf79121, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

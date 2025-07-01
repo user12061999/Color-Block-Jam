@@ -90,7 +90,25 @@ public class ItemContainer: IEnumerable<ItemStack> {
             }
         }
     }
+    public void Remove(ItemStack[] itemStacks, string placement=null, bool raiseEventTracking = true) {
+        foreach (var item in itemStacks) {
+            Remove(item, placement, false);
+        }
 
+        OnRemoved(itemStacks, placement, raiseEventTracking);
+    }
+
+    public void Remove(ItemStack itemStack, string placement=null, bool raiseEventTracking = true) {
+        for (int i = 0; i < itemStacks.Count; i++) {
+            ItemStack currentStack = itemStacks[i];
+            if (currentStack.Id == itemStack.Id) {
+                currentStack.Destack(itemStack.Amount);
+                itemStacks[i] = currentStack;
+                OnRemoved(itemStack, placement, raiseEventTracking);
+                return;
+            }
+        }
+    }
     public void Clear() {
         itemStacks.Clear();
     }
@@ -104,12 +122,24 @@ public class ItemContainer: IEnumerable<ItemStack> {
         return false;
     }
 
-    protected virtual void OnAdded(ItemStack itemStack) {
+    protected virtual void OnAdded(ItemStack itemStack, string placement=null, bool raiseEventTracking=false) {
         Log.Debug("[ItemContainer] +{0} {1}.", itemStack.Amount, itemStack.Id);
     }
 
-    protected virtual void OnRemoved(ItemStack itemStack) {
+    protected virtual void OnAdded(ItemStack[] itemStacks, string placement=null, bool raiseEventTracking=false) {
+        foreach (var itemStack in itemStacks) {
+            Log.Debug("[ItemContainer] +{0} {1}.", itemStack.Amount, itemStack.Id);
+        }
+    }
+
+    protected virtual void OnRemoved(ItemStack itemStack, string placement=null, bool raiseEventTracking=false) {
         Log.Debug("[ItemContainer] -{0} {1}.", itemStack.Amount, itemStack.Id);
+    }
+
+    protected virtual void OnRemoved(ItemStack[] itemStacks, string placement=null, bool raiseEventTracking=false) {
+        foreach (var itemStack in itemStacks) {
+            Log.Debug("[ItemContainer] -{0} {1}.", itemStack.Amount, itemStack.Id);
+        }
     }
 
     protected virtual void OnCleared() {

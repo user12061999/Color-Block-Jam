@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: ConfigDatabase
   m_EditorClassIdentifier: 
   defaultButtonPressAudio:
-    audioClip: {fileID: 8300000, guid: eafe70207cdba874fae453f992c7b56e, type: 3}
+    clip: {fileID: 0}
+    channel: 2
     volume: 1
     loop: 1
-    type: 0
-  maxLevel: 3
+    delay: 0
+  maxLevel: 999
   defaultInventory:
   - id: 1
     amount: 10000

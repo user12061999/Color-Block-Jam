@@ -7,24 +7,15 @@ using UnityEngine.UI;
 
 public class WinPanel : UIFrame
 {
+    [Header("[References]")] [SerializeField]
+    private Button btnClaim,btnClaimAds, btnHome;
 
-    [Header("[References]")]
-    [SerializeField] private Button btnClaim;
     [SerializeField] private ItemView rewardView;
 
     [SerializeField] private ItemView rewardWithAdsView;
-    [SerializeField] private ItemView starView;
-    [SerializeField] private ItemView starView2;
-    
-    [SerializeField] private GameObject normalGO;
-    [SerializeField] private GameObject leaderboardGO;
 
     [SerializeField] private ItemView rewardViewPrefab;
     [SerializeField] private Transform rewardViewContainer;
-    [SerializeField] private ProgressBarInt winChestProgressBar;
-    [SerializeField] private Transform winChest;
-    [SerializeField] private ProgressBarInt winChestProgressBar2;
-    [SerializeField] private Transform winChest2;
 
     private Sequence sequence;
 
@@ -34,34 +25,27 @@ public class WinPanel : UIFrame
 
     private void Awake()
     {
-        //views = new CollectionView<ItemView, ItemStack>(rewardViewPrefab, rewardViewContainer);
+        views = new CollectionView<ItemView, ItemStack>(rewardViewPrefab, rewardViewContainer);
     }
 
     private void Start()
     {
         btnClaim.onClick.AddListener(OnButtonClaimClicked);
-      
+        btnClaimAds.onClick.AddListener(OnButtonClaimAdsClicked);
+        btnHome.onClick.AddListener(OnClickButtonHome);
     }
 
     protected override void OnShow(bool instant = false)
     {
         base.OnShow(instant);
 
-       
         audioTween?.Kill();
-      
-      
-
-
-     
-
         sequence?.Kill();
         sequence = null;
-
-     
     }
 
-    protected override void OnHide(bool instant = false) {
+    protected override void OnHide(bool instant = false)
+    {
         base.OnHide(instant);
 
         sequence?.Kill();
@@ -71,18 +55,6 @@ public class WinPanel : UIFrame
 
     protected override void OnBack()
     {
-
-    }
-
-    public void SetStarRewards(ItemStack reward)
-    {
-        this.starReward = reward;
-
-        rewardView.SetModel(reward).Show();
-
-        starView.SetModel(reward).Show();
-        starView2.SetModel(reward).Show();
-        
     }
 
     public void SetRewards(ItemStack[] rewards)
@@ -92,24 +64,35 @@ public class WinPanel : UIFrame
 
     private void OnButtonClaimClicked()
     {
+        GameData.Inventory.Add(new ItemStack(ItemID.Coin,40));
         GameAdvertising.TryShowInterstitialAd();
-        
-
         if (GameController.Instance.DestroyGame())
         {
-            if (/*GameData.Classic.LevelUnlocked == 2 ||*/ GameData.Classic.LevelUnlocked == 3) {
-                ClassicLevelController levelController = GameController.Instance.LevelController as ClassicLevelController;
-                GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(GameData.Classic.LevelUnlocked);
-            
-                ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Game);
-            } else {
-                ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Home, () =>
-                {
-                    UIManager.Instance.Clear(true);
+            ClassicLevelController levelController =
+                GameController.Instance.LevelController as ClassicLevelController;
+            GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(GameData.Classic.LevelUnlocked);
 
-                });
-            }
-          
+            ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Game);
         }
+    }
+    private void OnButtonClaimAdsClicked()
+    {
+        GameAdvertising.TryShowRewardedAd(() =>
+        {
+            GameData.Inventory.Add(new ItemStack(ItemID.Coin,80));
+            ClassicLevelController levelController =
+                GameController.Instance.LevelController as ClassicLevelController;
+            GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(GameData.Classic.LevelUnlocked);
+
+            ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Game);
+        }, () =>
+        {
+           
+        });
+    }
+    public void OnClickButtonHome()
+    {
+        GameController.Instance.DestroyGame();
+        ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Home);
     }
 }

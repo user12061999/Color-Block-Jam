@@ -48,10 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103f601c85472e14e9e468ffb4933b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
   placement: home
   filter:
     network: 255
     group: 255
+  canvas: {fileID: 0}
   adStyle:
     templateId: small
     mainBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
@@ -463,6 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f039e7660dcbfbc489a7f1cc900dfabb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
   placement: home
   filter:
     network: 255
@@ -1319,7 +1322,7 @@ RectTransform:
   m_GameObject: {fileID: 5914414404464685533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3081955851940026215}
@@ -1343,7 +1346,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1352,7 +1355,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1968664631
+  m_SortingLayerID: -23672475
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &9119763294476602690
@@ -2853,6 +2856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a949a040ce623d499e399e420aa0b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
   placement: home
   filter:
     network: 7

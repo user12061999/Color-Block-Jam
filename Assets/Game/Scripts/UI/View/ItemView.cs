@@ -17,7 +17,7 @@ public class ItemView : View<ItemStack> {
     public override void Show() {
         animTween?.Kill();
 
-        Item itemData = ItemDatabase.Instance.GetDataById(Model.Id);
+        ItemData itemData = ItemDatabase.Instance.GetDataById(Model.Id);
         if(imgIcon) imgIcon.sprite = itemData.Icon;
         if (txtName) txtName.text = itemData.Name;
 
