@@ -330,7 +330,12 @@ MonoBehaviour:
   blockCollisionMask:
     serializedVersion: 2
     m_Bits: 384
-  boxColliders: []
+  boxColliders:
+  - {fileID: 2650570502837873266}
+  - {fileID: 8402420166334918515}
+  - {fileID: 8246052226351463626}
+  - {fileID: 6444458746985508479}
+  - {fileID: 234119988253554530}
   colorData: {fileID: 11400000, guid: 99b52704360f04241be5d88d256c1e1a, type: 2}
   renderer: {fileID: 8580411992987449977}
 --- !u!65 &2650570502837873266
