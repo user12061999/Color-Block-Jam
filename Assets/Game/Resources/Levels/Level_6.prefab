@@ -2450,9 +2450,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2838570782824423913}
-  - component: {fileID: 2817430284478949255}
   - component: {fileID: 4105969512929262799}
   - component: {fileID: 5577628829992106110}
+  - component: {fileID: 6782746428194731353}
+  - component: {fileID: 7338667863632763051}
+  - component: {fileID: 1670388992602252337}
   m_Layer: 0
   m_Name: Level_6
   m_TagString: Untagged
@@ -2476,18 +2478,6 @@ Transform:
   - {fileID: 2236639255276748842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2817430284478949255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2263787465268663896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e53d5a1c024e7c94da33529ae4744c63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4105969512929262799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2503,8 +2493,8 @@ MonoBehaviour:
   gridManager: {fileID: 5577628829992106110}
   calculateOnStart: 1
   gridBounds:
-    m_Center: {x: 4, y: 5, z: 0}
-    m_Extent: {x: 5, y: 6, z: 0}
+    m_Center: {x: 5, y: 5, z: 0}
+    m_Extent: {x: 6, y: 6, z: 0}
 --- !u!114 &5577628829992106110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2566,6 +2556,49 @@ MonoBehaviour:
   - {fileID: 3278961939651270962, guid: 892a6fa41a306124abee30866865e4c4, type: 3}
   numberToSpawn: 1
   blockParent: {fileID: 3524406531724447034}
+--- !u!114 &6782746428194731353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263787465268663896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629e542b10a8b0c4aad477d9405a88e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  child: {fileID: 0}
+  timer: {fileID: 7338667863632763051}
+  generator: {fileID: 1670388992602252337}
+  gridManager: {fileID: 5577628829992106110}
+--- !u!114 &7338667863632763051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263787465268663896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb71ac6069bcef349bf2eb054fa1881a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreTimeScale: 1
+--- !u!114 &1670388992602252337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263787465268663896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d356898bca630e46b3d289f92515a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 90
 --- !u!1 &2420463444257961278
 GameObject:
   m_ObjectHideFlags: 0

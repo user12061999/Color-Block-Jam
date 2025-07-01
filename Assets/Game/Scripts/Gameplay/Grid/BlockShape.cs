@@ -14,7 +14,7 @@ public class BlockShape : MonoBehaviour
     private Vector2Int originalGridPos;
 
     private Vector2Int previewOrigin;
-    public Vector2Int PreviewOrigin=>previewOrigin;
+    public Vector2Int PreviewOrigin => previewOrigin;
     private bool hasPreview = false;
     private bool isDragging = false;
     public bool IsCutting { get; set; } = false;
@@ -24,18 +24,18 @@ public class BlockShape : MonoBehaviour
     [SerializeField] private bool isLockY = false;
     [SerializeField] private GameObject lockXObject;
     [SerializeField] private GameObject lockYObject;
-    
-    
+
+
     [SerializeField] private bool hasSubShape = false;
     [SerializeField] private GameObject subObject;
-    [SerializeField] private BlockColorData subBlockColorData; 
-    public BlockColorData SubBlockColorData=>subBlockColorData;
-    
-    [SerializeField] private float dragZ =>transform.position.z;
+    [SerializeField] private BlockColorData subBlockColorData;
+    public BlockColorData SubBlockColorData => subBlockColorData;
+
+    [SerializeField] private float dragZ => transform.position.z;
     [SerializeField] private Vector3 boxCastHalfExtents = new Vector3(0.45f, 0.45f, 0.1f);
     [SerializeField] private LayerMask blockCollisionMask;
     [SerializeField] private BoxCollider[] boxColliders;
-    
+
     private float originalZ;
     private Vector3 targetPosition;
     [Header("Color Data")] public BlockColorData colorData;
@@ -61,23 +61,29 @@ public class BlockShape : MonoBehaviour
             subObject.GetComponent<Renderer>().material = subBlockColorData.material;
         }
         subObject.SetActive(hasSubShape);
+
+        if (colorData)
+        {
+            renderer.material = colorData.material;
+        }
+
     }
-[ContextMenu("OnCreate")]
+    [ContextMenu("OnCreate")]
     public void OnCreate()
     {
         if (colorData)
         {
             renderer.material = colorData.material;
         }
-        if (lockXObject==null)
+        if (lockXObject == null)
         {
             lockXObject = transform.GetChild(1).gameObject;
         }
-        if (lockYObject==null)
+        if (lockYObject == null)
         {
             lockYObject = transform.GetChild(2).gameObject;
         }
-        if (subObject==null)
+        if (subObject == null)
         {
             subObject = transform.GetChild(3).gameObject;
             var transform1 = renderer.transform;
@@ -92,7 +98,7 @@ public class BlockShape : MonoBehaviour
     {
         OnStart();
     }
-    
+
     public void OnCompleteDestroyBlock()
     {
         //EventDispatcher.Dispatch<GameEvent.DestroyBlockShape>(new GameEvent.DestroyBlockShape());
@@ -109,10 +115,10 @@ public class BlockShape : MonoBehaviour
         boxColliders = GetComponents<BoxCollider>();
         for (int i = 0; i < occupiedOffsets.Length; i++)
         {
-            boxColliders[i].size=Vector3.one * 2;
-            boxColliders[i].center=new Vector2(occupiedOffsets[i].x,occupiedOffsets[i].y) * 2;
+            boxColliders[i].size = Vector3.one * 2;
+            boxColliders[i].center = new Vector2(occupiedOffsets[i].x, occupiedOffsets[i].y) * 2;
         }
-        
+
         /*foreach (var VARIABLE in occupiedOffsets)
         {
             BoxCollider cache = this.AddComponent<BoxCollider>();
@@ -152,7 +158,7 @@ public class BlockShape : MonoBehaviour
             {
                 Vector3 moveDirY = yDir.normalized;
                 float moveY = Mathf.Min(moveDist, Mathf.Abs(yDir.y));
-           
+
                 if (!CheckSlide(moveDirY, moveY))
                 {
                     transform.position += moveDirY * moveY;
@@ -167,7 +173,7 @@ public class BlockShape : MonoBehaviour
                 }
             }
         }
-        
+
 
         if (!isLockX)
         {
@@ -177,7 +183,7 @@ public class BlockShape : MonoBehaviour
             {
                 Vector3 moveDirX = xDir.normalized;
                 float moveX = Mathf.Min(moveDist, Mathf.Abs(xDir.x));
-            
+
                 if (!CheckSlide(moveDirX, moveX))
                 {
                     transform.position += moveDirX * moveX;
@@ -191,7 +197,7 @@ public class BlockShape : MonoBehaviour
                 }
             }
         }
-        
+
 
         // Snap preview
         Vector2Int snapped = grid.WorldToGrid(transform.position);
@@ -252,48 +258,48 @@ public class BlockShape : MonoBehaviour
     }
 
     private void OnMouseDrag()
-{
-    if (!isDragging) return;
-
-    Vector3 mouseWorld = GetMouseWorldByRay() + dragOffset;
-    mouseWorld.z = dragZ;
-    // Chuyển đổi vị trí con trỏ sang vị trí trong grid
-    Vector2Int gridPos = grid.WorldToGrid(mouseWorld);
-
-    if (grid.IsValid(gridPos))
     {
-        targetPosition = mouseWorld;
-    }
-    else
-    {
-        // Tìm vị trí hợp lệ gần nhất trên biên grid theo hướng con trỏ
-        Vector2Int nearestEdgePos = FindNearestEdgePosition(gridPos, mouseWorld);
-        targetPosition = grid.GridToWorld(nearestEdgePos) + new Vector3(0, 0, dragZ);
-    }
-}
+        if (!isDragging) return;
 
-private Vector2Int FindNearestEdgePosition(Vector2Int invalidPos, Vector3 mouseWorld)
-{
-    Vector2Int nearestEdgePos = invalidPos;
-    float minDistance = float.MaxValue;
+        Vector3 mouseWorld = GetMouseWorldByRay() + dragOffset;
+        mouseWorld.z = dragZ;
+        // Chuyển đổi vị trí con trỏ sang vị trí trong grid
+        Vector2Int gridPos = grid.WorldToGrid(mouseWorld);
 
-    foreach (var cellPos in grid.GetAllValidCells())
-    {
-        // Chỉ xét các vị trí nằm trên biên grid
-        if (IsOnGridEdge(cellPos))
+        if (grid.IsValid(gridPos))
         {
-            Vector3 cellWorldPos = grid.GridToWorld(cellPos);
-            float distance = Vector3.Distance(cellWorldPos, mouseWorld);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                nearestEdgePos = cellPos;
-            }
+            targetPosition = mouseWorld;
+        }
+        else
+        {
+            // Tìm vị trí hợp lệ gần nhất trên biên grid theo hướng con trỏ
+            Vector2Int nearestEdgePos = FindNearestEdgePosition(gridPos, mouseWorld);
+            targetPosition = grid.GridToWorld(nearestEdgePos) + new Vector3(0, 0, dragZ);
         }
     }
 
-    return nearestEdgePos;
-}
+    private Vector2Int FindNearestEdgePosition(Vector2Int invalidPos, Vector3 mouseWorld)
+    {
+        Vector2Int nearestEdgePos = invalidPos;
+        float minDistance = float.MaxValue;
+
+        foreach (var cellPos in grid.GetAllValidCells())
+        {
+            // Chỉ xét các vị trí nằm trên biên grid
+            if (IsOnGridEdge(cellPos))
+            {
+                Vector3 cellWorldPos = grid.GridToWorld(cellPos);
+                float distance = Vector3.Distance(cellWorldPos, mouseWorld);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestEdgePos = cellPos;
+                }
+            }
+        }
+
+        return nearestEdgePos;
+    }
 
     private bool IsOnGridEdge(Vector2Int pos)
     {
