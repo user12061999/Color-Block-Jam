@@ -39,8 +39,9 @@ public class BlockCutter : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+        if (ClassicLevelController.instance == null) return;
         BlockShape block = other.GetComponentInParent<BlockShape>();
-        if (block != null)
+        if (block != null && block == ClassicLevelController.instance.BlockShapeSelected)
         {
             Quaternion rotation = Quaternion.Euler(boxRotation);
             Vector3 center = transform.position + rotation * boxCenterOffset;
@@ -51,10 +52,11 @@ public class BlockCutter : MonoBehaviour
                 grid.SpawnSubBlock(block);
                 CutBlock(block, () =>
                 {
+                    ClassicLevelController.instance.BlockShapeSelected = null;
                     EventDispatcher.Dispatch<GameEvent.DestroyBlockShape>(new GameEvent.DestroyBlockShape());
                 });
             }
-            
+
         }
     }
     [ContextMenu("Set Color Data")]
@@ -142,7 +144,7 @@ public class BlockCutter : MonoBehaviour
         return false; // Không bị chặn
     }
 
-    private void CutBlock(BlockShape block,Action callBack=null)
+    private void CutBlock(BlockShape block, Action callBack = null)
     {
         Vector3 moveDirection = cutterDirection.GetVector3().normalized;
         float cellSize = grid.cellSize;
