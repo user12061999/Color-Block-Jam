@@ -1,11 +1,17 @@
+using System;
 using HAVIGAME;
 using HAVIGAME.SaveLoad;
+using UnityEngine;
 
 [System.Serializable]
 public class InventorySaveData : ItemContainer, ISaveData {
     [System.NonSerialized] private bool isChanged;
-
+    [SerializeField] private long heartRegenTimeTicks;
+    [SerializeField] private long infinityHeartTimeTicks;
+    public DateTime HeartRegenTime => new DateTime(heartRegenTimeTicks);
+    public DateTime InfinityHeartTime => new DateTime(infinityHeartTimeTicks);
     public bool IsChanged => isChanged;
+    [System.NonSerialized] private bool isLastInfinityHeart;
 
     public InventorySaveData() : base() {
         Add(ConfigDatabase.Instance.DefaultInventory);
@@ -13,6 +19,18 @@ public class InventorySaveData : ItemContainer, ISaveData {
         isChanged = false;
     }
 
+    public bool IsInfinityHeart {
+        get {
+            bool isInfinityHeart = infinityHeartTimeTicks > DateTime.Now.Ticks;
+
+            if (isLastInfinityHeart != isInfinityHeart) {
+                isLastInfinityHeart = isInfinityHeart;
+                GameAnalytics.SetProperty("infinity_heart", isInfinityHeart ? "1" : "0");
+            }
+
+            return isInfinityHeart;
+        }
+    }
     public void Dispose() {
 
     }

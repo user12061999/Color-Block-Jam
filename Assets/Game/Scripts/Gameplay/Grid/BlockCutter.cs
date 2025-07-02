@@ -39,6 +39,10 @@ public class BlockCutter : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+        if (grid == null)
+        {
+            return;
+        }
         BlockShape block = other.GetComponentInParent<BlockShape>();
         if (block != null)
         {

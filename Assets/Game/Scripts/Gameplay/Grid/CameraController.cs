@@ -26,13 +26,21 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        UpdateCamera(gridBoundsCalculator.gridBounds);
+        if (gridBoundsCalculator)
+        {
+            UpdateCamera(gridBoundsCalculator.gridBounds);
+        }
+        
     }
 
     private void OnValidate()
     {
-        mainCamera.fieldOfView = fieldOfView; // Áp dụng giá trị FoV khi validate
-        UpdateCamera(gridBoundsCalculator.gridBounds);
+         // Áp dụng giá trị FoV khi validate
+        if (gridBoundsCalculator)
+        {
+            mainCamera.fieldOfView = fieldOfView;
+            UpdateCamera(gridBoundsCalculator.gridBounds);
+        }
     }
 
     public void UpdateCamera(Bounds bounds)
