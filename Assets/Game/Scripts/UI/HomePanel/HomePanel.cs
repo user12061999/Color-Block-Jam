@@ -4,7 +4,8 @@ using UnityEngine.UI;
 using TMPro;
 using HAVIGAME.Scenes;
 
-public class HomePanel : UITab {
+public class HomePanel : UITab
+{
     [Header("[References]")]
     [SerializeField] private Button btnProfile;
     [SerializeField] private Button btnSetting;
@@ -17,9 +18,14 @@ public class HomePanel : UITab {
 
     [SerializeField] private Button btnAdvertising;
 
+    //------------------------------------------
     private int currentLevel;
+    [SerializeField] private GameObject[] arrayButtons;
+    [SerializeField] private Sprite[] arraySpriteMap;
+    [SerializeField] private Sprite[] arraySpriteButton;
 
-    private void Start() {
+    private void Start()
+    {
         btnPlay.onClick.AddListener(PlayGame);
         btnPreviousLevel.onClick.AddListener(PreviousLevel);
         btnNextLevel.onClick.AddListener(NextLevel);
@@ -31,9 +37,87 @@ public class HomePanel : UITab {
         btnLuckySpin.onClick.AddListener(OpenLuckySpin);
 
         btnAdvertising.onClick.AddListener(OpenAdvertising);
+
+
+    }
+    void OnEnable()
+    {
+        SetForButtonUI();
+    }
+    public void SetForButtonUI()
+    {
+        SetTextLevel();
+        CheckDifficulty();
+    }
+    private void SetTextLevel()
+    {
+        currentLevel = GameData.Classic.LevelUnlocked;
+        for (int i = 0; i < arrayButtons.Length; i++)
+        {
+            arrayButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = string.Format("{0}", currentLevel + i);
+        }
+        btnPlay.GetComponentInChildren<TextMeshProUGUI>().text = "LEVEL " + currentLevel;
+    }
+    private void CheckDifficulty()
+    {
+        //BUTTONPLAY
+        string paths = $"LevelSO/Level_{currentLevel}";
+        ConfigLevel difficultyDatas = Resources.Load<ConfigLevel>(paths);
+        btnPlay.gameObject.GetComponent<Image>().sprite = arraySpriteButton[1];
+
+        if (difficultyDatas != null)
+        {
+            if (difficultyDatas.difficulty == DifficultyLevel.Hard)
+            {
+                btnPlay.GetComponent<Image>().sprite = arraySpriteButton[1];
+            }
+            else
+            {
+                btnPlay.GetComponent<Image>().sprite = arraySpriteButton[0];
+            }
+        }
+
+        //BUTTON UI
+        for (int i = 0; i < arrayButtons.Length; i++)
+        {
+            string path = $"LevelSO/Level_{currentLevel + i}";
+            ConfigLevel difficultyData = Resources.Load<ConfigLevel>(path);
+            if (difficultyData != null)
+            {
+                GameObject hardIndicator = arrayButtons[i].transform.GetChild(1).gameObject;
+                if (hardIndicator == null)
+                {
+                    Debug.LogError("Hard Indicator not found in button at index: " + i);
+                    continue; // Skip if hardIndicator is not found
+                }
+
+
+                if (difficultyData.difficulty == DifficultyLevel.Hard)
+                {
+                    //print(currentLevel + "HARD");
+                    hardIndicator.SetActive(true);
+
+                    if (i == 0)
+                    {
+                        arrayButtons[i].GetComponent<Image>().sprite = arraySpriteMap[1];
+                    }
+                }
+                else
+                {
+                    // print(currentLevel + "EASY");
+                    hardIndicator.SetActive(false);
+                    if (i == 0)
+                    {
+                        arrayButtons[i].GetComponent<Image>().sprite = arraySpriteMap[0];
+                    }
+                }
+            }
+
+        }
     }
 
-    protected override void OnShow(bool instant = false) {
+    protected override void OnShow(bool instant = false)
+    {
         base.OnShow(instant);
 
         int levelUnlocked = GameData.Classic.LevelUnlocked;
@@ -41,11 +125,13 @@ public class HomePanel : UITab {
 
     }
 
-    protected override void OnBack() {
+    protected override void OnBack()
+    {
         OpenSettings();
     }
 
-    private void ShowLevel(int level) {
+    private void ShowLevel(int level)
+    {
         currentLevel = level;
         txtLevel.text = string.Format("LEVEL {0}", level);
 
@@ -53,38 +139,46 @@ public class HomePanel : UITab {
         btnNextLevel.gameObject.SetActive(currentLevel < GameData.Classic.LevelUnlocked);
     }
 
-    private void PreviousLevel() {
+    private void PreviousLevel()
+    {
         ShowLevel(currentLevel - 1);
     }
 
-    private void NextLevel() {
+    private void NextLevel()
+    {
         ShowLevel(currentLevel + 1);
     }
 
-    private void PlayGame() {
+    private void PlayGame()
+    {
         int levelToPlay = currentLevel;
         Debug.Log(levelToPlay);
         GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(levelToPlay);
         ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Game);
     }
 
-    private void OpenSettings() {
+    private void OpenSettings()
+    {
         UIManager.Instance.Push<SettingsPanel>();
     }
 
-    private void OpenProfile() {
+    private void OpenProfile()
+    {
         UIManager.Instance.Push<ProfilePanel>();
     }
 
-    private void OpenDailyReward() {
+    private void OpenDailyReward()
+    {
         UIManager.Instance.Push<DailyRewardPanel>();
     }
 
-    private void OpenLuckySpin() {
+    private void OpenLuckySpin()
+    {
         UIManager.Instance.Push<LuckySpinPanel>();
     }
 
-    private void OpenAdvertising() {
+    private void OpenAdvertising()
+    {
         UIManager.Instance.Push<TestPanel>();
     }
 }
