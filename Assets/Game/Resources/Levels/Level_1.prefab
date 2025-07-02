@@ -6119,6 +6119,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3524406531724447034}
     m_Modifications:
+    - target: {fileID: 5155178076440708714, guid: 466a8b6678eaa5b44801486d925803e1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aeac2191b74e61d40bf8e70ca2b651ac, type: 2}
     - target: {fileID: 5177719556229367398, guid: 466a8b6678eaa5b44801486d925803e1, type: 3}
       propertyPath: m_Name
       value: Basket_4
