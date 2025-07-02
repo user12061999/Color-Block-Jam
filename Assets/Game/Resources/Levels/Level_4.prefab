@@ -1830,6 +1830,7 @@ MonoBehaviour:
   child: {fileID: 0}
   timer: {fileID: 5670186438599140268}
   generator: {fileID: 4820342320627909189}
+  gridBoundsCalculator: {fileID: 4105969512929262799}
   gridManager: {fileID: 5577628829992106110}
 --- !u!114 &4820342320627909189
 MonoBehaviour:
@@ -1843,7 +1844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d356898bca630e46b3d289f92515a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 90
+  duration: 10
 --- !u!114 &5670186438599140268
 MonoBehaviour:
   m_ObjectHideFlags: 0

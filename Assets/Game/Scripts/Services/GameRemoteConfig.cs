@@ -25,7 +25,13 @@ public static class GameRemoteConfig {
     private const string rateFilterKey = "rate_filter";
     private const string appOpenLoadingDuration = "app_open_loading_duration";
 
-
+    
+    private const string interstitialAdCappingTimeKey = "interstitial_ad_capping_time";
+    public static int InterstitialAdCappingTime {
+        get {
+            return GetIntValue(interstitialAdCappingTimeKey, 30);
+        }
+    }
     public static int RateFilter {
         get {
             return GetIntValue(rateFilterKey, 4);

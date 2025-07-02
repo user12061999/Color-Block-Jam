@@ -72,8 +72,33 @@ public class ItemContainer: IEnumerable<ItemStack> {
         itemStacks.Add(itemStack);
         OnAdded(itemStack);
     }
+    public void Add(ItemStack itemStack, string placement, bool raiseEventTracking = true) {
+        ItemData data = ItemDatabase.Instance.GetDataById(itemStack.Id);
 
-    public void Remove(ItemStack[] itemStacks) {
+        if (data != null) {
+            if (data.Storable) {
+                for (int i = 0; i < itemStacks.Count; i++) {
+                    ItemStack currentStack = itemStacks[i];
+                    if (currentStack.Id == itemStack.Id) {
+                        currentStack.Stack(itemStack.Amount);
+                        itemStacks[i] = currentStack;
+                        OnAdded(itemStack, placement, raiseEventTracking);
+                        return;
+                    }
+                }
+
+                itemStacks.Add(itemStack);
+                OnAdded(itemStack, placement, raiseEventTracking);
+            } else {
+                for (int i = 0; i < itemStack.Amount; i++) {
+                    data.OnUse();
+                }
+            }
+        } else {
+            Log.Error("[ItemContainer] Add item failed! Item with id {0} no found.", itemStack.Id);
+        }
+    }
+    /*public void Remove(ItemStack[] itemStacks) {
         foreach (var item in itemStacks) {
             Remove(item);
         }
@@ -89,7 +114,15 @@ public class ItemContainer: IEnumerable<ItemStack> {
                 return;
             }
         }
+    }*/
+    public void Add(ItemStack[] itemStacks, string placement, bool raiseEventTracking = true) {
+        foreach (var item in itemStacks) {
+            Add(item, placement, false);
+        }
+
+        OnAdded(itemStacks, placement, raiseEventTracking);
     }
+
     public void Remove(ItemStack[] itemStacks, string placement=null, bool raiseEventTracking = true) {
         foreach (var item in itemStacks) {
             Remove(item, placement, false);

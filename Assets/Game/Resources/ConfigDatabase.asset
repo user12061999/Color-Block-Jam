@@ -21,7 +21,9 @@ MonoBehaviour:
   maxLevel: 999
   defaultInventory:
   - id: 1
-    amount: 10000
-  - id: 2
     amount: 100
+  - id: 3
+    amount: 2
   defaultValueFormat: '#,##0'
+  heartRegenCooldown: 20
+  maxHeart: 5
