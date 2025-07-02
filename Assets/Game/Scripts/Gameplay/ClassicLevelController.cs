@@ -118,6 +118,7 @@ public class ClassicLevelController : LevelController
 
         DOVirtual.DelayedCall(1.5f, () =>
         {
+            Debug.Log("OnWinLevel");
             gamePanel.Interactable = true;
             GameData.Classic.OnLevelCompleted(GameController.Instance.LoadLevelOption.Level);
             WinPanel winPanel = UIManager.Instance.Push<WinPanel>();

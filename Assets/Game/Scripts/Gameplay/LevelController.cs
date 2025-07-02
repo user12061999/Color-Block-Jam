@@ -41,7 +41,7 @@ public class LevelController : MonoBehaviour {
             parent.WinLevel();
             return;
         }
-
+    Debug.Log(gameObject.name+ " WinLevel");
         OnWinLevel();
     }
 

@@ -64,7 +64,8 @@ public class PlayerSaveData : SaveData {
     }
 
     public void OnStartGameSeason() {
-        seasonCount++;
+        /*seasonCount++;
+        /*seasonCount++;
         GameAnalytics.SetProperty("played_season", seasonCount.ToString());
 
         if (DateTime.Today.CompareTo(SeasonDay) > 0) {
@@ -72,6 +73,7 @@ public class PlayerSaveData : SaveData {
 
             EventDispatcher.Dispatch(new GameEvent.OnDailyLogin(SeasonDay));
         }
+        */
 
         SetChanged();
     }

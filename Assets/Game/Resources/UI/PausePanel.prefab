@@ -3572,7 +3572,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 2454808122011310543}
   transition: {fileID: 1809858143013754123}
   btnHome: {fileID: 8495103074318976883}
-  btnSkip: {fileID: 8495103074318976883}
+  btnSkip: {fileID: 1885396526638710905}
 --- !u!1 &7310361407551995579
 GameObject:
   m_ObjectHideFlags: 0

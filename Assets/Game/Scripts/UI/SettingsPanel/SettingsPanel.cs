@@ -3,7 +3,7 @@ using HAVIGAME.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsPanel : UIFrame {
+public class SettingsPanel : UITab {
     [Header("[References]")]
     [SerializeField] private Button btnQuit;
     [SerializeField] private Button btnRestorePurchase;
