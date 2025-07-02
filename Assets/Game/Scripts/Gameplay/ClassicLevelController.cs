@@ -9,6 +9,8 @@ using UnityEngine;
 
 public class ClassicLevelController : LevelController
 {
+    //singleton
+    public static ClassicLevelController instance;
 
     [SerializeField] protected LevelTimer timer;
     [SerializeField] protected LevelGenerator generator;
@@ -28,6 +30,18 @@ public class ClassicLevelController : LevelController
     public bool IsUsingBooster => isUsingBooster;
     public bool IsCountdownPaused => timer.IsPaused;
     public int BoosterUsed => boosterUsed;
+    private BlockShape blockShapeSelected;
+    public BlockShape BlockShapeSelected
+    {
+        get { return blockShapeSelected; }
+        set
+        {
+            if (blockShapeSelected != value)
+            {
+                blockShapeSelected = value;
+            }
+        }
+    }
 
     public int TotalMove
     {
@@ -39,6 +53,13 @@ public class ClassicLevelController : LevelController
     {
         Debug.Log("OnBlockShapeChange");
         CheckWinLose();
+    }
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
     private void Start()
@@ -61,7 +82,7 @@ public class ClassicLevelController : LevelController
         this.isResolving = false;
 
         dictBooster = new Dictionary<int, int>();
-        
+
         //CameraController.Instance.UpdateCamera(generator.Bounds);
         CheckHideTutorial();
     }
@@ -83,7 +104,7 @@ public class ClassicLevelController : LevelController
         gamePanel.Interactable = true;
 
         int seconds = generator.Duration;
-        
+
 
         StartCountdown(seconds);
         PauseCountdown(false);
@@ -99,7 +120,7 @@ public class ClassicLevelController : LevelController
 
     private void HandleLevelStart()
     {
-        
+
     }
 
     public override void WinLevel(bool isWinBySkip = false)
@@ -110,7 +131,7 @@ public class ClassicLevelController : LevelController
     protected override void OnWinLevel(bool isWinBySkip = false)
     {
         base.OnWinLevel(isWinBySkip);
-        
+
         isWon = true;
         timer.Stop();
         gamePanel.Interactable = false;
@@ -122,7 +143,7 @@ public class ClassicLevelController : LevelController
             gamePanel.Interactable = true;
             GameData.Classic.OnLevelCompleted(GameController.Instance.LoadLevelOption.Level);
             WinPanel winPanel = UIManager.Instance.Push<WinPanel>();
-            
+
             /*if (GameData.Classic.LevelUnlocked == 2)
             {
                 GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(GameData.Classic.LevelUnlocked);
@@ -294,7 +315,7 @@ public class ClassicLevelController : LevelController
     protected virtual void CheckWinLose()
     {
         int remainingBlocks = gridManager.BlockParent.childCount; // Assuming blocks are children of GridManager
-        Debug.Log("check win lose: " + remainingBlocks );
+        Debug.Log("check win lose: " + remainingBlocks);
         if (remainingBlocks == 0)
         {
             WinLevel();
@@ -302,7 +323,7 @@ public class ClassicLevelController : LevelController
         }
 
         // Check Lose Condition
-        if (TotalMove > 100 ) // Example thresholds
+        if (TotalMove > 100) // Example thresholds
         {
             LoseLevel();
         }
@@ -568,47 +589,47 @@ public class ClassicLevelController : LevelController
 }
 
 #region EVENT ANALYTICS
-    /*public void LogWinLevelEvent()
-    {
-        GameAnalytics.LogEvent(CreateWinlevelEvent());
-    }
+/*public void LogWinLevelEvent()
+{
+    GameAnalytics.LogEvent(CreateWinlevelEvent());
+}
 
-    public void LogLoseLevelEvent(string reason)
-    {
-        GameAnalytics.LogEvent(CreateLoselevelEvent(reason));
-    }
+public void LogLoseLevelEvent(string reason)
+{
+    GameAnalytics.LogEvent(CreateLoselevelEvent(reason));
+}
 
-    private GameAnalytics.GameEvent CreateWinlevelEvent()
-    {
-        return GameAnalytics.GameEvent.Create("level_end")
-            .Add("level", Option.Level.ToString())
-            .Add("result", "win")
-            .Add("total_move", TotalMove.ToString())
-            .Add("play_time", Mathf.CeilToInt(Time.time - startedTime))
-            .Add("use_time_freeze", GetBoosterUsed(ItemID.TimeFreezeBooster))
-            .Add("use_reroll", GetBoosterUsed(ItemID.RerollBooster))
-            .Add("use_more_time", GetBoosterUsed(ItemID.MoreTimeBooster))
-            .Add("use_magic_wand", GetBoosterUsed(ItemID.MagicWandBooster))
-            .Add("use_double_star", GetBoosterUsed(ItemID.DoubleStarBooster))
-            .Add("use_big_hammer", GetBoosterUsed(ItemID.BigHammerBooster))
-            .Add("use_small_hammer", GetBoosterUsed(ItemID.SmallHammerBooster))
-            .Add("use_used", boosterUsed.ToString());
-    }
+private GameAnalytics.GameEvent CreateWinlevelEvent()
+{
+    return GameAnalytics.GameEvent.Create("level_end")
+        .Add("level", Option.Level.ToString())
+        .Add("result", "win")
+        .Add("total_move", TotalMove.ToString())
+        .Add("play_time", Mathf.CeilToInt(Time.time - startedTime))
+        .Add("use_time_freeze", GetBoosterUsed(ItemID.TimeFreezeBooster))
+        .Add("use_reroll", GetBoosterUsed(ItemID.RerollBooster))
+        .Add("use_more_time", GetBoosterUsed(ItemID.MoreTimeBooster))
+        .Add("use_magic_wand", GetBoosterUsed(ItemID.MagicWandBooster))
+        .Add("use_double_star", GetBoosterUsed(ItemID.DoubleStarBooster))
+        .Add("use_big_hammer", GetBoosterUsed(ItemID.BigHammerBooster))
+        .Add("use_small_hammer", GetBoosterUsed(ItemID.SmallHammerBooster))
+        .Add("use_used", boosterUsed.ToString());
+}
 
-    private GameAnalytics.GameEvent CreateLoselevelEvent(string reason)
-    {
-        return GameAnalytics.GameEvent.Create("level_end")
-            .Add("level", Option.Level.ToString())
-            .Add("result", "fail")
-            .Add("reason", reason)
-            .Add("play_time", Mathf.CeilToInt(Time.time - startedTime).ToString())
-            .Add("use_time_freeze", GetBoosterUsed(ItemID.TimeFreezeBooster))
-            .Add("use_reroll", GetBoosterUsed(ItemID.RerollBooster))
-            .Add("use_more_time", GetBoosterUsed(ItemID.MoreTimeBooster))
-            .Add("use_magic_wand", GetBoosterUsed(ItemID.MagicWandBooster))
-            .Add("use_double_star", GetBoosterUsed(ItemID.DoubleStarBooster))
-            .Add("use_big_hammer", GetBoosterUsed(ItemID.BigHammerBooster))
-            .Add("use_small_hammer", GetBoosterUsed(ItemID.SmallHammerBooster))
-            .Add("use_used", boosterUsed.ToString());
-    }*/
-    #endregion
+private GameAnalytics.GameEvent CreateLoselevelEvent(string reason)
+{
+    return GameAnalytics.GameEvent.Create("level_end")
+        .Add("level", Option.Level.ToString())
+        .Add("result", "fail")
+        .Add("reason", reason)
+        .Add("play_time", Mathf.CeilToInt(Time.time - startedTime).ToString())
+        .Add("use_time_freeze", GetBoosterUsed(ItemID.TimeFreezeBooster))
+        .Add("use_reroll", GetBoosterUsed(ItemID.RerollBooster))
+        .Add("use_more_time", GetBoosterUsed(ItemID.MoreTimeBooster))
+        .Add("use_magic_wand", GetBoosterUsed(ItemID.MagicWandBooster))
+        .Add("use_double_star", GetBoosterUsed(ItemID.DoubleStarBooster))
+        .Add("use_big_hammer", GetBoosterUsed(ItemID.BigHammerBooster))
+        .Add("use_small_hammer", GetBoosterUsed(ItemID.SmallHammerBooster))
+        .Add("use_used", boosterUsed.ToString());
+}*/
+#endregion

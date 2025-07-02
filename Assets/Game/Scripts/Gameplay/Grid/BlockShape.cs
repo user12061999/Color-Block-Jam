@@ -1,5 +1,6 @@
 using System.Linq;
 using HAVIGAME;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -35,6 +36,9 @@ public class BlockShape : MonoBehaviour
     [SerializeField] private Vector3 boxCastHalfExtents = new Vector3(0.45f, 0.45f, 0.1f);
     [SerializeField] private LayerMask blockCollisionMask;
     [SerializeField] private BoxCollider[] boxColliders;
+    [SerializeField] private bool isFreeze = false;
+    [SerializeField] private int numFreeze = 0;
+    [SerializeField] private TextMeshProUGUI textFreeze;
 
     private float originalZ;
     private Vector3 targetPosition;
@@ -42,8 +46,15 @@ public class BlockShape : MonoBehaviour
 
     public Renderer renderer;
 
+
+    private void OnDestroy()
+    {
+        EventDispatcher.RemoveListener<GameEvent.DestroyBlockShape>(UpdateFreeze);
+
+    }
     private void Start()
     {
+        EventDispatcher.AddListener<GameEvent.DestroyBlockShape>(UpdateFreeze);
         OnStart();
         grid = FindObjectOfType<GridManager>();
         if (colorData != null)
@@ -66,8 +77,31 @@ public class BlockShape : MonoBehaviour
         {
             renderer.material = colorData.material;
         }
+        if (textFreeze == null) return;
+        if (isFreeze)
+        {
+            string materialPath = "Materials/3d-freezee";
+            Material materialFromResources = Resources.Load<Material>(materialPath);
+            subObject.GetComponent<Renderer>().material = materialFromResources;
+            if (materialFromResources != null)
+            {
+                renderer.material = materialFromResources;
+            }
+            UpdateTextFreeze(numFreeze.ToString());
+        }
+        else
+        {
+            UpdateTextFreeze("");
+        }
 
     }
+    void UpdateTextFreeze(string text)
+    {
+        if (textFreeze == null) return;
+        textFreeze.text = text;
+
+    }
+
     [ContextMenu("OnCreate")]
     public void OnCreate()
     {
@@ -103,6 +137,23 @@ public class BlockShape : MonoBehaviour
     {
         //EventDispatcher.Dispatch<GameEvent.DestroyBlockShape>(new GameEvent.DestroyBlockShape());
         Debug.Log(" - Block destroyed: " + this.name);
+    }
+    public void UpdateFreeze(GameEvent.DestroyBlockShape e)
+    {
+        print("FREZZZE UPDATE");
+        if (isFreeze)
+        {
+            numFreeze--;
+            if (numFreeze > 0)
+            {
+                UpdateTextFreeze(numFreeze.ToString());
+            }
+            else
+            {
+                isFreeze = false;
+                OnStart();
+            }
+        }
     }
 
     public void OnCutting()
@@ -140,7 +191,7 @@ public class BlockShape : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (!isDragging) return;
+        if (!isDragging || isFreeze) return;
 
         Vector3 toTarget = targetPosition - transform.position;
         float totalDist = toTarget.magnitude;
@@ -240,6 +291,11 @@ public class BlockShape : MonoBehaviour
         originalGridPos = CurrentOrigin;
         dragOffset = transform.position - GetMouseWorldByRay();
         originalZ = transform.position.z;
+
+
+        if (ClassicLevelController.instance == null) return;
+        ClassicLevelController.instance.BlockShapeSelected = this;
+
         foreach (var VARIABLE in boxColliders)
         {
             VARIABLE.enabled = false;
