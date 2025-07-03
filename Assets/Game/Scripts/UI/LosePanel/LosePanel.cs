@@ -7,58 +7,68 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LosePanel : GameUIFrame {
+public class LosePanel : GameUIFrame
+{
     [Header("[References]")]
     [SerializeField] private Button btnClose;
     [SerializeField] private ItemView rewardViewPrefab;
     [SerializeField] private Transform rewardViewContainer;
     [SerializeField] private ItemView priceView;
-    [SerializeField] private Button btnReviveAds,btnReviveGold;
+    [SerializeField] private Button btnReviveAds, btnReviveGold;
 
     private int itemId;
     private Action<bool> callback;
     private Tween audioTween;
     private CollectionView<ItemView, ItemStack> views;
 
-    private void Awake() {
-        //views = new CollectionView<ItemView, ItemStack>(rewardViewPrefab, rewardViewContainer);
+    private void Awake()
+    {
+        views = new CollectionView<ItemView, ItemStack>(rewardViewPrefab, rewardViewContainer);
     }
 
-    private void Start() {
+    private void Start()
+    {
         btnReviveAds.onClick.AddListener(OnClickButtonAds);
         btnReviveGold.onClick.AddListener(OnClickButtonGold);
         btnClose.onClick.AddListener(OnClickButtonHome);
     }
 
-    protected override void OnShow(bool instant = false) {
+    protected override void OnShow(bool instant = false)
+    {
         base.OnShow(instant);
 
         //GameAnalytics.LogEvent(GameAnalytics.GameEvent.Create("iap_show").Add("position", "ingame"));
     }
-    protected override void OnShowCompleted() {
+    protected override void OnShowCompleted()
+    {
         base.OnShowCompleted();
         ShowPack();
     }
 
-    private void ShowPack() {
-        
+    private void ShowPack()
+    {
+
     }
 
-    protected override void OnHide(bool instant = false) {
+    protected override void OnHide(bool instant = false)
+    {
         base.OnHide(instant);
 
         audioTween?.Kill();
     }
 
-    protected override void OnBack() {
+    protected override void OnBack()
+    {
 
     }
 
-    public void SetLostRewards(ItemStack[] rewards) {
+    public void SetLostRewards(ItemStack[] rewards)
+    {
         views.SetModels(rewards).Show();
     }
 
-    public void SetItem(int itemId, Action<bool> callback) {
+    public void SetItem(int itemId, Action<bool> callback)
+    {
         this.itemId = itemId;
         this.callback = callback;
 
@@ -67,7 +77,8 @@ public class LosePanel : GameUIFrame {
         priceView.SetModel(data.Price).Show();
     }
 
-    private void OnPurchase() {
+    private void OnPurchase()
+    {
         /*ItemData data = ItemDatabase.Instance.GetDataById(itemId);
 
         bool isEnought = GameData.Inventory.IsEnought(data.Price);
@@ -83,12 +94,13 @@ public class LosePanel : GameUIFrame {
         }*/
     }
 
-    public void OnRevive(int time=20)
+    public void OnRevive(int time = 20)
     {
         ClassicLevelController levelController = GameController.Instance.LevelController as ClassicLevelController;
         if (levelController != null) levelController.AddMoreSeconds(time);
     }
-    private void OnAdsPurchase() {
+    private void OnAdsPurchase()
+    {
         //GameData.Inventory.Add(new ItemStack(itemId, 1), "rewarded_ad");
         Hide();
         callback?.Invoke(true);
@@ -108,7 +120,8 @@ public class LosePanel : GameUIFrame {
     }
     public void OnClickButtonAds()
     {
-        GameAdvertising.TryShowRewardedAd(() => {
+        GameAdvertising.TryShowRewardedAd(() =>
+        {
             OnRevive();
             Hide();
             callback?.Invoke(true);
@@ -120,7 +133,8 @@ public class LosePanel : GameUIFrame {
         ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Home);
     }
 
-    private void OnCloseButtonClicked() {
+    private void OnCloseButtonClicked()
+    {
         Hide();
         callback?.Invoke(false);
     }

@@ -25,12 +25,14 @@ public class ClassicLevelController : LevelController
     protected int totalMove;
     protected bool isWon = false;
     protected Dictionary<int, int> dictBooster;
+    private BlockShape blockShapeSelected;
+    private int countBuyTime;
+
     public LevelTimer Timer => timer;
     public bool IsResolving => isResolving;
     public bool IsUsingBooster => isUsingBooster;
     public bool IsCountdownPaused => timer.IsPaused;
     public int BoosterUsed => boosterUsed;
-    private BlockShape blockShapeSelected;
     public BlockShape BlockShapeSelected
     {
         get { return blockShapeSelected; }
@@ -42,6 +44,7 @@ public class ClassicLevelController : LevelController
             }
         }
     }
+    public int CountBuyTime => countBuyTime;
 
     public int TotalMove
     {
@@ -143,7 +146,7 @@ public class ClassicLevelController : LevelController
             gamePanel.Interactable = true;
             GameData.Classic.OnLevelCompleted(GameController.Instance.LoadLevelOption.Level);
             WinPanel winPanel = UIManager.Instance.Push<WinPanel>();
-
+            winPanel.SetRewards(new ItemStack[] { new ItemStack(ItemID.Coin, 250) });
             /*if (GameData.Classic.LevelUnlocked == 2)
             {
                 GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(GameData.Classic.LevelUnlocked);
@@ -153,7 +156,7 @@ public class ClassicLevelController : LevelController
             {
                 WinPanel winPanel = UIManager.Instance.Push<WinPanel>();
                 //winPanel.SetStarRewards(new ItemStack(ItemID.Star, totalStarEarned));
-                //winPanel.SetRewards(new ItemStack[] { /*new ItemStack(ItemID.BuildTicket, 1),#1# new ItemStack(ItemID.Credit, 200) });
+                //
             }*/
 
         });
@@ -175,7 +178,7 @@ public class ClassicLevelController : LevelController
         StopShowInterstitialAd();
         Time.timeScale = 1;
 
-
+        countBuyTime++;
     }
 
     public int GetBoosterUsed(int boosterId)
