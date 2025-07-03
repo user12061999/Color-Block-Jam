@@ -424,17 +424,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &1436973457 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4105969512929262799, guid: 8076a9e1dd4045342b72f8f0640d6d22, type: 3}
-  m_PrefabInstance: {fileID: 1616633059}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ef197f4fa49f9c45b2dd20690c6ebbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1482368829
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +455,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1616633059
+--- !u!1001 &1579479838
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -477,14 +466,6 @@ PrefabInstance:
     - target: {fileID: 2263787465268663896, guid: 8076a9e1dd4045342b72f8f0640d6d22, type: 3}
       propertyPath: m_Name
       value: Level_25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2263787465268663896, guid: 8076a9e1dd4045342b72f8f0640d6d22, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2767191393186197141, guid: 8076a9e1dd4045342b72f8f0640d6d22, type: 3}
-      propertyPath: isFreeze
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2838570782824423913, guid: 8076a9e1dd4045342b72f8f0640d6d22, type: 3}
       propertyPath: m_LocalPosition.x
@@ -526,10 +507,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5498586663693971705, guid: 8076a9e1dd4045342b72f8f0640d6d22, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 47a9fffa818680e41b7a630f2d147936, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -625,7 +602,7 @@ GameObject:
   - component: {fileID: 2033529023}
   - component: {fileID: 2033529024}
   m_Layer: 0
-  m_Name: CameraController
+  m_Name: CameraController (singleton)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -660,7 +637,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1434015825}
-  gridBoundsCalculator: {fileID: 1436973457}
   widthRange: {x: 0.3, y: 1}
   heightRange: {x: 0, y: 0.9}
   fieldOfView: 24.404966
@@ -673,4 +649,4 @@ SceneRoots:
   - {fileID: 2033529023}
   - {fileID: 1330301473}
   - {fileID: 160711972}
-  - {fileID: 1616633059}
+  - {fileID: 1579479838}

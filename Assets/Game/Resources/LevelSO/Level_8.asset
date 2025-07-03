@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelId: 8
   difficulty: 0
+  time: 240

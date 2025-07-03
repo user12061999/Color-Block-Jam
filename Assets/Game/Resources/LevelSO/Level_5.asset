@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Level_5
   m_EditorClassIdentifier: 
   levelId: 5
-  difficulty: 1
+  difficulty: 0
+  time: 240

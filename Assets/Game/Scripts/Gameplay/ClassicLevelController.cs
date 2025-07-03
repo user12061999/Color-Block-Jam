@@ -164,7 +164,10 @@ public class ClassicLevelController : LevelController
             GameData.Classic.OnLevelCompleted(GameController.Instance.LoadLevelOption.Level);
             WinPanel winPanel = UIManager.Instance.Push<WinPanel>();
 
-            winPanel.SetRewards(new ItemStack[] { new ItemStack(ItemID.Coin, 250) });
+            //winPanel.SetRewards(new ItemStack[] { new ItemStack(ItemID.Coin, ConfigDatabase.Instance.CoinWin) });
+
+            winPanel.SetCoin(new ItemStack(ItemID.Coin, ConfigDatabase.Instance.CoinWin));
+
             /*if (GameData.Classic.LevelUnlocked == 2)
             {
                 GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(GameData.Classic.LevelUnlocked);
@@ -189,9 +192,8 @@ public class ClassicLevelController : LevelController
     protected override void OnLoseLevel()
     {
         base.OnLoseLevel();
-
+        if (isWon) return;
         timer.Pause();
-
         gamePanel.Interactable = false;
         CheckHideTutorial();
         StopShowInterstitialAd();
@@ -201,6 +203,7 @@ public class ClassicLevelController : LevelController
 
         DOVirtual.DelayedCall(1.5f, () =>
         {
+            if (isWon) return;
             gamePanel.Interactable = true;
             LosePanel losePanel = UIManager.Instance.Push<LosePanel>();
             losePanel.SetCoin(new ItemStack(ItemID.Coin, 250 * countBuyTime));
