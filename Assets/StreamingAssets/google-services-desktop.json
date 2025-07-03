@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "466609451356",
+    "project_id": "color-block-jam-f338a",
+    "storage_bucket": "color-block-jam-f338a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466609451356:android:54ccf315340d2097589199",
+        "android_client_info": {
+          "package_name": "com.color.block.jam.colorblockjam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBegnOD37PR_o2Spwwdy-mE1jHa5JBwJGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
