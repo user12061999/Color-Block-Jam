@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 250
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 424d0e58b080c234caef5e0a895f721f, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 0c730cece2d08114f9a3e77f28022f53, type: 2}
@@ -1599,6 +1599,9 @@ MonoBehaviour:
   rewardViewPrefab: {fileID: 0}
   rewardViewContainer: {fileID: 0}
   priceView: {fileID: 8039952242704458445}
+  priceItem:
+    id: 1
+    amount: 40
   btnReviveAds: {fileID: 8371591537202016289}
   btnReviveGold: {fileID: 1519167257969811849}
 --- !u!1 &6068847547901473654

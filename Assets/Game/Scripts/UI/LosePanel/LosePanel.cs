@@ -13,7 +13,7 @@ public class LosePanel : GameUIFrame
     [SerializeField] private Button btnClose;
     [SerializeField] private ItemView rewardViewPrefab;
     [SerializeField] private Transform rewardViewContainer;
-    [SerializeField] private ItemView priceView;
+    [SerializeField] private ItemView priceView; [SerializeField] private ItemStack priceItem;
     [SerializeField] private Button btnReviveAds, btnReviveGold;
 
     private int itemId;
@@ -25,7 +25,6 @@ public class LosePanel : GameUIFrame
     {
         views = new CollectionView<ItemView, ItemStack>(rewardViewPrefab, rewardViewContainer);
     }
-
     private void Start()
     {
         btnReviveAds.onClick.AddListener(OnClickButtonAds);
@@ -43,6 +42,24 @@ public class LosePanel : GameUIFrame
     {
         base.OnShowCompleted();
         ShowPack();
+    }
+    public void CheckButton()
+    {
+        btnReviveAds.gameObject.SetActive(false);
+        btnReviveGold.gameObject.SetActive(false);
+
+        //print(GameData.Inventory.Get(priceItem));
+        bool isEnought = GameData.Inventory.IsEnought(priceItem);
+        //GameData.Inventory.Add(new ItemStack(ItemID.Coin, 100), "trade");
+        // GameData.Inventory.Remove(new ItemStack(ItemID.Coin, 100), "trade");
+        if (isEnought)
+        {
+            btnReviveGold.gameObject.SetActive(true);
+        }
+        else
+        {
+            btnReviveAds.gameObject.SetActive(true);
+        }
     }
 
     private void ShowPack()
@@ -66,38 +83,50 @@ public class LosePanel : GameUIFrame
     {
         views.SetModels(rewards).Show();
     }
-
-    public void SetItem(int itemId, Action<bool> callback)
+    public void SetCoin(ItemStack itemStack)
     {
-        this.itemId = itemId;
-        this.callback = callback;
-
-        ItemData data = ItemDatabase.Instance.GetDataById(itemId);
-
-        priceView.SetModel(data.Price).Show();
+        priceItem = itemStack;
+        priceView.SetModel(itemStack).Show();
     }
+    // public void SetItem(int itemId, Action<bool> callback)
+    // {
+    //     this.itemId = itemId;
+    //     this.callback = callback;
+
+    //     ItemData data = ItemDatabase.Instance.GetDataById(itemId);
+
+    //     priceView.SetModel(data.Price).Show();
+    // }
 
     private void OnPurchase()
     {
-        /*ItemData data = ItemDatabase.Instance.GetDataById(itemId);
+        // ItemData data = ItemDatabase.Instance.GetDataById(itemId);
 
-        bool isEnought = GameData.Inventory.IsEnought(data.Price);
+        bool isEnought = GameData.Inventory.IsEnought(priceItem);
 
-        if (isEnought) {
-            GameData.Inventory.Remove(data.Price, "trade");
+        if (isEnought)
+        {
+            GameData.Inventory.Remove(priceItem, "trade");
             GameData.Inventory.Add(new ItemStack(itemId, 1), "trade");
             Hide();
             callback?.Invoke(true);
-        } else {
-            ItemData priceData = ItemDatabase.Instance.GetDataById(data.Price.Id);
+        }
+        else
+        {
+            ItemData priceData = ItemDatabase.Instance.GetDataById(priceItem.Id);
             NotifyPopupManager.Instance.PushNotify(Utility.Text.Format("You don't have enough {0}.", priceData.Name));
-        }*/
+        }
     }
 
     public void OnRevive(int time = 20)
     {
-        ClassicLevelController levelController = GameController.Instance.LevelController as ClassicLevelController;
-        if (levelController != null) levelController.AddMoreSeconds(time);
+        // ClassicLevelController levelController = GameController.Instance.LevelController as ClassicLevelController;
+        // if (levelController = null) return;
+        ClassicLevelController.instance.AddMoreSeconds(time);
+
+        // ClassicLevelController.instance.GamePanels.SetCountdownTime(time);
+        // ClassicLevelController.instance.Timer.Resume();
+
     }
     private void OnAdsPurchase()
     {
@@ -108,11 +137,11 @@ public class LosePanel : GameUIFrame
 
     public void OnClickButtonGold()
     {
-        ItemData data = ItemDatabase.Instance.GetDataById(itemId);
-        bool isEnought = GameData.Inventory.IsEnought(data.Price);
+        //ItemData data = ItemDatabase.Instance.GetDataById(itemId);
+        bool isEnought = GameData.Inventory.IsEnought(priceItem);
         if (isEnought)
         {
-            GameData.Inventory.Remove(data.Price);
+            GameData.Inventory.Remove(priceItem);
             OnRevive();
             Hide();
             callback?.Invoke(true);

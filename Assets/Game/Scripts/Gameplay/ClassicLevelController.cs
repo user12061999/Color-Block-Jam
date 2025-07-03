@@ -29,6 +29,7 @@ public class ClassicLevelController : LevelController
     private BlockShape blockShapeSelected;
     private int countBuyTime;
 
+    public GamePanel GamePanels => gamePanel;
     public LevelTimer Timer => timer;
     public bool IsResolving => isResolving;
     public bool IsUsingBooster => isUsingBooster;
@@ -111,6 +112,7 @@ public class ClassicLevelController : LevelController
         gamePanel = UIManager.Instance.Push<GamePanel>();
         gamePanel.SetCountdownTime(generator.Duration);
         gamePanel.Interactable = true;
+        countBuyTime = 0;
 
         int seconds = generator.Duration;
 
@@ -200,7 +202,9 @@ public class ClassicLevelController : LevelController
         DOVirtual.DelayedCall(1.5f, () =>
         {
             gamePanel.Interactable = true;
-            LosePanel winPanel = UIManager.Instance.Push<LosePanel>();
+            LosePanel losePanel = UIManager.Instance.Push<LosePanel>();
+            losePanel.SetCoin(new ItemStack(ItemID.Coin, 250 * countBuyTime));
+            losePanel.CheckButton();
         });
 
 
@@ -444,7 +448,8 @@ public class ClassicLevelController : LevelController
 
     public virtual void AddMoreSeconds(int amount)
     {
-        timer.Add(amount);
+        timer.AddTime(amount);
+        timer.Resume();
     }
 
 

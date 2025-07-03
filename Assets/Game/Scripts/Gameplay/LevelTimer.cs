@@ -2,7 +2,8 @@ using HAVIGAME;
 using System;
 using UnityEngine;
 
-public class LevelTimer : MonoBehaviour {
+public class LevelTimer : MonoBehaviour
+{
     [SerializeField] private bool ignoreTimeScale = true;
 
     private Timer timer = new Timer();
@@ -15,48 +16,77 @@ public class LevelTimer : MonoBehaviour {
     public int ElapsedSeconds => timer.Elapsed;
     public int RemainingSeconds => timer.Remaining;
 
-    public void Pause() {
+    public void Pause()
+    {
         timer.Pause();
     }
 
-    public void Resume() {
+    public void Resume()
+    {
         timer.Resume();
     }
 
-    public void Stop() {
+    public void Stop()
+    {
         timer.Stop();
     }
 
-    public void Add(int seconds) {
-        if (IsRunning) {
+    public void Add(int seconds)
+    {
+        if (IsRunning)
+        {
             int remainingSeconds = RemainingSeconds;
             int totalSeconds = remainingSeconds + seconds;
 
             Stop();
 
-            if (totalSeconds > 0) {
+            if (totalSeconds > 0)
+            {
                 timer.Countdown(totalSeconds, OnCountdownUpdated, OnCountdownCompleted, ignoreTimeScale);
                 Pause();
             }
-            else {
+            else
+            {
                 OnCountdownCompleted();
             }
         }
     }
+    public void AddTime(int seconds)
+    {
 
-    public void Countdown(int totalSeconds, Action onCompleted) {
-        
+        int remainingSeconds = RemainingSeconds;
+        int totalSeconds = remainingSeconds + seconds;
+
+        Stop();
+
+        if (totalSeconds > 0)
+        {
+            timer.Countdown(totalSeconds, OnCountdownUpdated, OnCountdownCompleted, ignoreTimeScale);
+            Pause();
+        }
+        else
+        {
+            OnCountdownCompleted();
+        }
+
+    }
+
+    public void Countdown(int totalSeconds, Action onCompleted)
+    {
+
         this.onCompleted = onCompleted;
 
         timer.Stop();
         timer.Countdown(totalSeconds, OnCountdownUpdated, OnCountdownCompleted, ignoreTimeScale);
     }
 
-    private void OnCountdownUpdated() {
+    private void OnCountdownUpdated()
+    {
         EventDispatcher.Dispatch(new GameEvent.LevelTimeChanged(TotalSeconds, ElapsedSeconds, RemainingSeconds));
     }
 
-    private void OnCountdownCompleted() {
+    private void OnCountdownCompleted()
+    {
         onCompleted?.Invoke();
     }
 }

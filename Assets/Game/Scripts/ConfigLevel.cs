@@ -9,6 +9,7 @@ public class ConfigLevel : ScriptableObject
 {
     public int levelId;
     public DifficultyLevel difficulty;
+    public int time;
 }
 
 

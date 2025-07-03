@@ -50,9 +50,10 @@ public class BlockCutter : MonoBehaviour
             {
                 block.IsCutting = true;
                 grid.SpawnSubBlock(block);
+                ClassicLevelController.instance.BlockShapeSelected = null;
                 CutBlock(block, () =>
                 {
-                    ClassicLevelController.instance.BlockShapeSelected = null;
+
                     EventDispatcher.Dispatch<GameEvent.DestroyBlockShape>(new GameEvent.DestroyBlockShape());
                 });
             }
