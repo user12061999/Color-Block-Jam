@@ -9,7 +9,7 @@ public class GridBoundsCalculator : MonoBehaviour
 
     public Bounds gridBounds;
 
-    private void Start()
+    private void Awake()
     {
         if (calculateOnStart)
             CalculateBoundsFromValidCells();

@@ -295,7 +295,7 @@ public class BlockShape : MonoBehaviour
 
         if (ClassicLevelController.instance == null) return;
         ClassicLevelController.instance.BlockShapeSelected = this;
-
+        ClassicLevelController.instance.ResumeCountdown();
         foreach (var VARIABLE in boxColliders)
         {
             VARIABLE.enabled = false;

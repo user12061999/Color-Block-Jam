@@ -14,6 +14,7 @@ public class ClassicLevelController : LevelController
 
     [SerializeField] protected LevelTimer timer;
     [SerializeField] protected LevelGenerator generator;
+    [SerializeField] protected GridBoundsCalculator gridBoundsCalculator;
     [SerializeField] protected GridManager gridManager;
 
     protected ParticleSystem highlightVFX;
@@ -57,6 +58,11 @@ public class ClassicLevelController : LevelController
         Debug.Log("OnBlockShapeChange");
         CheckWinLose();
     }
+    [ContextMenu("OnCreate")]
+    public void OnCreate()
+    {
+        CameraController.Instance.UpdateCamera(gridBoundsCalculator.gridBounds);
+    }
     void Awake()
     {
         if (instance == null)
@@ -86,7 +92,7 @@ public class ClassicLevelController : LevelController
 
         dictBooster = new Dictionary<int, int>();
 
-        //CameraController.Instance.UpdateCamera(generator.Bounds);
+        CameraController.Instance.UpdateCamera(gridBoundsCalculator.gridBounds);
         CheckHideTutorial();
     }
 
@@ -98,12 +104,12 @@ public class ClassicLevelController : LevelController
     protected override void OnStartLevel()
     {
         base.OnStartLevel();
+        CameraController.Instance.UpdateCamera(gridBoundsCalculator.gridBounds);
         startedTime = Time.time;
         TotalMove = 0;
-
-
+        GameData.Inventory.Remove(new ItemStack(ItemID.Heart, 1), "lose");
         gamePanel = UIManager.Instance.Push<GamePanel>();
-        //gamePanel.SetCountdownTime(generator.Duration);
+        gamePanel.SetCountdownTime(generator.Duration);
         gamePanel.Interactable = true;
 
         int seconds = generator.Duration;
@@ -111,8 +117,18 @@ public class ClassicLevelController : LevelController
 
         StartCountdown(seconds);
         PauseCountdown(false);
+        if (GameData.Classic.LevelUnlocked >= 3)
+        {
+            StartShowInterstitialAd();
+        }
     }
+    private void StartShowInterstitialAd()
+    {
+        StopShowInterstitialAd();
 
+        float cappingTime = GameRemoteConfig.InterstitialAdCappingTime;
+        if (cappingTime > 0) intersitialAdCoroutine = StartCoroutine(IEShowIntersitialAd(GameRemoteConfig.InterstitialAdCappingTime));
+    }
     /*public void SetInputSource(PlayerInputHandler playerInputHandler)
     {
         playerInputHandler.SetListener(this);
@@ -139,13 +155,13 @@ public class ClassicLevelController : LevelController
         timer.Stop();
         gamePanel.Interactable = false;
         Time.timeScale = 1;
-
+        StopShowInterstitialAd();
         DOVirtual.DelayedCall(1.5f, () =>
         {
-            Debug.Log("OnWinLevel");
             gamePanel.Interactable = true;
             GameData.Classic.OnLevelCompleted(GameController.Instance.LoadLevelOption.Level);
             WinPanel winPanel = UIManager.Instance.Push<WinPanel>();
+
             winPanel.SetRewards(new ItemStack[] { new ItemStack(ItemID.Coin, 250) });
             /*if (GameData.Classic.LevelUnlocked == 2)
             {
@@ -158,6 +174,7 @@ public class ClassicLevelController : LevelController
                 //winPanel.SetStarRewards(new ItemStack(ItemID.Star, totalStarEarned));
                 //
             }*/
+
 
         });
     }
@@ -179,6 +196,14 @@ public class ClassicLevelController : LevelController
         Time.timeScale = 1;
 
         countBuyTime++;
+
+        DOVirtual.DelayedCall(1.5f, () =>
+        {
+            gamePanel.Interactable = true;
+            LosePanel winPanel = UIManager.Instance.Push<LosePanel>();
+        });
+
+
     }
 
     public int GetBoosterUsed(int boosterId)

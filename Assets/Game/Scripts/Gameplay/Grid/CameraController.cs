@@ -1,16 +1,27 @@
 using System;
 using UnityEngine;
-
+using HAVIGAME;
 [ExecuteAlways]
-public class CameraController : MonoBehaviour
-{
+public class CameraController : Singleton<CameraController> {
+
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private GridBoundsCalculator gridBoundsCalculator;
     [SerializeField] private Vector2 widthRange = new Vector2(0.1f, 0.9f);
     [SerializeField] private Vector2 heightRange = new Vector2(0.1f, 0.9f);
 
     [SerializeField] private float fieldOfView = 60f; // Góc Field of View
-
+    public override bool IsDontDestroyOnLoad => false;
+    public Camera MainCamera => mainCamera;
+    public Vector2 HeightRange
+    {
+        get
+        {
+            return heightRange;
+        }
+        set
+        {
+            heightRange = value;
+        }
+    }    
     public float FieldOfView
     {
         get => fieldOfView;
@@ -26,21 +37,13 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        if (gridBoundsCalculator)
-        {
-            UpdateCamera(gridBoundsCalculator.gridBounds);
-        }
+        
         
     }
 
     private void OnValidate()
     {
-         // Áp dụng giá trị FoV khi validate
-        if (gridBoundsCalculator)
-        {
-            mainCamera.fieldOfView = fieldOfView;
-            UpdateCamera(gridBoundsCalculator.gridBounds);
-        }
+         
     }
 
     public void UpdateCamera(Bounds bounds)

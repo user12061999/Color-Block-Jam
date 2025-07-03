@@ -210,7 +210,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1390766492}
-  gridBoundsCalculator: {fileID: 0}
   widthRange: {x: 0.3, y: 1}
   heightRange: {x: 0, y: 1}
   fieldOfView: 60

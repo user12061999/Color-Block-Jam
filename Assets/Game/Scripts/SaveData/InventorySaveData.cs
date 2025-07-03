@@ -14,9 +14,12 @@ public class InventorySaveData : ItemContainer, ISaveData {
     [System.NonSerialized] private bool isLastInfinityHeart;
 
     public InventorySaveData() : base() {
-        Add(ConfigDatabase.Instance.DefaultInventory);
+        Add(ConfigDatabase.Instance.DefaultInventory, "default", false);
 
-        isChanged = false;
+        heartRegenTimeTicks = DateTime.Now.Ticks;
+        infinityHeartTimeTicks = 0;
+        isChanged = true;
+        isLastInfinityHeart = false;
     }
 
     public bool IsInfinityHeart {
@@ -134,7 +137,11 @@ public class InventorySaveData : ItemContainer, ISaveData {
             EventDispatcher.Dispatch(new GameEvent.PlayerInventoryChanged(this, itemStack, false));
         }
     }
-
+    
+    public void ChangeHeartRegenTime(DateTime dateTime) {
+        heartRegenTimeTicks = dateTime.Ticks;
+        isChanged = true;
+    }
     protected override void OnCleared() {
         base.OnCleared();
 

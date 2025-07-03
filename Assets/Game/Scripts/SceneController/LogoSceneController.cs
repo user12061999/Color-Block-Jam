@@ -54,7 +54,10 @@ public class LogoSceneController : SceneController {
                 steps++;
             }
         }
-
+        
+        GameData.Initialize();
+        GameAdvertising.Instance.Create();
+        HeartRegenerator.Instance.Create();
         yield return null;
 
         int seasonCount = GameData.Player.SeasonCount;

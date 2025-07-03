@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using HAVIGAME;
 using UnityEngine;
 
@@ -25,5 +26,27 @@ public struct ItemStack {
         else {
             this.amount -= amount;
         }
+    }
+}
+public static class ItemStackExtensions {
+    private static readonly Dictionary<int, ItemStack> cache = new Dictionary<int, ItemStack>();
+    
+    
+    public static IEnumerable<ItemStack> Stack(this IEnumerable<ItemStack> itemStacks) {
+        cache.Clear();
+
+        foreach (var item in itemStacks) {
+            if (cache.ContainsKey(item.Id)) {
+                var itemStack = cache[item.Id];
+                itemStack.Stack(item.Amount);
+                cache[item.Id] = itemStack;
+
+                //cache[item.Id].Stack(item.Amount);
+            } else {
+                cache[item.Id] = item;
+            }
+        }
+
+        return cache.Values;
     }
 }

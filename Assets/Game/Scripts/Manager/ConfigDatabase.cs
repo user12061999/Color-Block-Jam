@@ -8,8 +8,8 @@ public class ConfigDatabase : Database<ConfigDatabase> {
     [SerializeField] private int maxLevel;
     [SerializeField] private ItemStack[] defaultInventory;
     [SerializeField] private string defaultValueFormat = "#,##0";
-    [SerializeField] private int heartRegenCooldown = 300;
-    [SerializeField] private int maxHeart = 5;
+    [SerializeField] private int heartRegenCooldown = 20;
+    [SerializeField] private int maxHeart = 99;
     public Audio DefaultButtonPressAudio => defaultButtonPressAudio;
     public int HeartRegenCooldown => heartRegenCooldown;
     public int MaxHeart => maxHeart;
