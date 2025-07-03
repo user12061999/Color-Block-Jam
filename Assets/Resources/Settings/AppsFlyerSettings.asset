@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f563eaf7f5038340973e9e49780784d, type: 3}
   m_Name: AppsFlyerSettings
   m_EditorClassIdentifier: 
-  devKey: 
+  devKey: 48zwGUAgMkcqgxDx7ogt2N
   appID: 
-  isDebug: 0
-  getConversionData: 0
-  revenueAnalyticEnabled: 0
+  saveConversionData: 1
+  saveId: appsflyer
+  sanboxMode: 0

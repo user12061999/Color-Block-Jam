@@ -14,11 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serviceProviders:
   - rid: 577893893861539913
+  - rid: 976551120067100763
   references:
     version: 2
     RefIds:
     - rid: 577893893861539913
       type: {class: FirebaseAnalyticServiceProvider, ns: HAVIGAME.Plugins.Firebases, asm: Assembly-CSharp}
+      data:
+        logAdRevenue: 0
+        logIAPRevenue: 0
+    - rid: 976551120067100763
+      type: {class: AppsflyerAnalyticServiceProvider, ns: HAVIGAME.Plugins.AppsFlyer, asm: Assembly-CSharp}
       data:
         logAdRevenue: 0
         logIAPRevenue: 0
