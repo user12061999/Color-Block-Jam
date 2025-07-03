@@ -312,7 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingView: {fileID: 8369823815019490076}
   poolPreloaders: []
-  ingameConsolePrefab: {fileID: 183544, guid: 6d0acc00cc82d436b9d11446d2ddfef6, type: 3}
+  ingameConsolePrefab: {fileID: 0}
 --- !u!1 &1515547359
 GameObject:
   m_ObjectHideFlags: 0
