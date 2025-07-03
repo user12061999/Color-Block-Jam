@@ -7,10 +7,12 @@ using UnityEngine.UI;
 
 public class WinPanel : UIFrame
 {
-    [Header("[References]")] [SerializeField]
+    [Header("[References]")]
+    [SerializeField]
     private Button btnClaim, btnClaimAds, btnHome;
 
     [SerializeField] private ItemView rewardView;
+    private ItemStack priceItem;
 
     [SerializeField] private ItemView rewardWithAdsView;
 
@@ -18,6 +20,7 @@ public class WinPanel : UIFrame
     [SerializeField] private Transform rewardViewContainer;
 
     private Sequence sequence;
+    private Sequence sequences;
 
     private ItemStack starReward;
     private Tween audioTween;
@@ -31,7 +34,7 @@ public class WinPanel : UIFrame
     private void Start()
     {
         btnClaim.onClick.AddListener(OnButtonClaimClicked);
-        //btnClaimAds.onClick.AddListener(OnButtonClaimAdsClicked);
+        btnClaimAds.onClick.AddListener(OnButtonClaimAdsClicked);
         btnHome.onClick.AddListener(OnClickButtonHome);
     }
 
@@ -41,6 +44,8 @@ public class WinPanel : UIFrame
         audioTween?.Kill();
         sequence?.Kill();
         sequence = null;
+        sequences = null;
+        ShowClaimButton();
     }
 
     protected override void OnHide(bool instant = false)
@@ -59,10 +64,24 @@ public class WinPanel : UIFrame
     {
         views.SetModels(rewards).Show();
     }
+    void ShowClaimButton()
+    {
+        btnClaim.gameObject.SetActive(false);
+        btnClaimAds.gameObject.SetActive(true);
+        sequences?.Kill();
+
+        // Create new sequence for delayed button activation
+        sequences = DOTween.Sequence()
+            .AppendInterval(3f)  // Wait for 3 seconds
+            .AppendCallback(() =>
+            {
+                btnClaim.gameObject.SetActive(true);
+            });
+    }
 
     private void OnButtonClaimClicked()
     {
-        GameData.Inventory.Add(new ItemStack(ItemID.Coin, 40));
+        GameData.Inventory.Add(new ItemStack(ItemID.Coin, ConfigDatabase.Instance.CoinWin));
         GameAdvertising.TryShowInterstitialAd();
         if (GameController.Instance.DestroyGame())
         {
@@ -73,12 +92,19 @@ public class WinPanel : UIFrame
             ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Game);
         }
     }
-
+    public void SetCoin(ItemStack itemStack)
+    {
+        priceItem = itemStack;
+        priceItem.Stack(ConfigDatabase.Instance.CoinWin);
+        rewardView.SetModel(itemStack).Show();
+        rewardWithAdsView.SetModel(priceItem).Show();
+    }
     private void OnButtonClaimAdsClicked()
     {
+        // GameData.Inventory.Add(new ItemStack(ItemID.Coin, ConfigDatabase.Instance.CoinWin * 2));
         GameAdvertising.TryShowRewardedAd(() =>
         {
-            GameData.Inventory.Add(new ItemStack(ItemID.Coin, 80));
+            GameData.Inventory.Add(new ItemStack(ItemID.Coin, ConfigDatabase.Instance.CoinWin * 2));
             ClassicLevelController levelController =
                 GameController.Instance.LevelController as ClassicLevelController;
             GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(GameData.Classic.LevelUnlocked);

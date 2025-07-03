@@ -57,10 +57,11 @@ public class BlockShape : MonoBehaviour
         EventDispatcher.AddListener<GameEvent.DestroyBlockShape>(UpdateFreeze);
         OnStart();
         grid = FindObjectOfType<GridManager>();
-        if (colorData != null)
-        {
-            renderer.material = colorData.material;
-        }
+
+        // if (colorData != null)
+        // {
+        //     renderer.material = colorData.material;
+        // }
     }
 
     public void OnStart()
@@ -78,6 +79,7 @@ public class BlockShape : MonoBehaviour
             renderer.material = colorData.material;
         }
         if (textFreeze == null) return;
+
         if (isFreeze)
         {
             string materialPath = "Materials/3d-freezee";
