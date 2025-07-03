@@ -12,185 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1206f5894f29864a93c431badc0b895, type: 3}
   m_Name: AdMobSettings
   m_EditorClassIdentifier: 
-  appOpenAdIds:
-  - rid: 577893893861539920
-  rewardedAdIds:
-  - rid: 577893893861539922
-  interstitialAdIds:
-  - rid: 577893893861539924
-  - rid: 577893893861539942
-  bannerAdIds:
-  - rid: 577893893861539926
-  mediumRectangleAdIds:
-  - rid: 577893893861539928
-  rewardedInterstitialAdIds:
-  - rid: 577893893861539930
-  nativeAdIds:
-  - rid: 577893893861539932
-  nativeOverlayAdIds:
-  - rid: 577893893861539918
-  nativeImmersiveAdIds:
-  - rid: 3918175796418576454
-  nativeCustomAdIds: []
+  enable:
+    value:
+      rid: 976551120067100793
+  appOpenAdIds: []
+  rewardedAdIds: []
+  interstitialAdIds: []
+  bannerAdIds: []
+  mediumRectangleAdIds: []
+  rewardedInterstitialAdIds: []
+  nativeAdIds: []
+  nativeOverlayAdIds: []
+  nativeImmersiveAdIds: []
   tagForChildDirectedTreatment: -1
   tagForUnderAgeOfConsent: -1
+  bannerAdSize:
+    type: 4
+    width: 0
+    height: 0
   nativeAdEnabled: 0
-  nativeImmersiveAdEnabled: 1
-  customAdEnabled: 1
+  nativeImmersiveAdEnabled: 0
+  customAdEnabled: 0
   collapsibleBanner:
     value:
       rid: 577893893861539934
-  nativeOverlayAdStyles:
-  - templateId: small
-    mainBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
-    primaryText:
-      enable: 0
-      backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-      textColor: {r: 0, g: 0, b: 0, a: 0}
-      fontSize: 0
-      fontStyle: 0
-    secondaryText:
-      enable: 0
-      backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-      textColor: {r: 0, g: 0, b: 0, a: 0}
-      fontSize: 0
-      fontStyle: 0
-    tertiaryText:
-      enable: 0
-      backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-      textColor: {r: 0, g: 0, b: 0, a: 0}
-      fontSize: 0
-      fontStyle: 0
-    callToActionText:
-      enable: 0
-      backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-      textColor: {r: 0, g: 0, b: 0, a: 0}
-      fontSize: 0
-      fontStyle: 0
+  preloadBufferSize:
+    value:
+      rid: 976551120067100794
   references:
     version: 2
     RefIds:
-    - rid: 577893893861539918
-      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
-      data:
-        group: 17
-        autoLoadType: 63
-        id:
-          value:
-            rid: 577893893861539919
-    - rid: 577893893861539919
-      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
-      data:
-        value: ca-app-pub-3940256099942544/2247696110
-    - rid: 577893893861539920
-      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
-      data:
-        group: 17
-        autoLoadType: 63
-        id:
-          value:
-            rid: 577893893861539921
-    - rid: 577893893861539921
-      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
-      data:
-        value: ca-app-pub-3940256099942544/9257395921
-    - rid: 577893893861539922
-      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
-      data:
-        group: 17
-        autoLoadType: 63
-        id:
-          value:
-            rid: 577893893861539923
-    - rid: 577893893861539923
-      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
-      data:
-        value: ca-app-pub-3940256099942544/5224354917
-    - rid: 577893893861539924
-      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
-      data:
-        group: 17
-        autoLoadType: 63
-        id:
-          value:
-            rid: 577893893861539925
-    - rid: 577893893861539925
-      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
-      data:
-        value: ca-app-pub-3940256099942544/1033173712
-    - rid: 577893893861539926
-      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
-      data:
-        group: 17
-        autoLoadType: 63
-        id:
-          value:
-            rid: 577893893861539927
-    - rid: 577893893861539927
-      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
-      data:
-        value: ca-app-pub-3940256099942544/6300978111
-    - rid: 577893893861539928
-      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
-      data:
-        group: 17
-        autoLoadType: 63
-        id:
-          value:
-            rid: 577893893861539929
-    - rid: 577893893861539929
-      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
-      data:
-        value: ca-app-pub-3940256099942544/6300978111
-    - rid: 577893893861539930
-      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
-      data:
-        group: 17
-        autoLoadType: 63
-        id:
-          value:
-            rid: 577893893861539931
-    - rid: 577893893861539931
-      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
-      data:
-        value: ca-app-pub-3940256099942544/5354046379
-    - rid: 577893893861539932
-      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
-      data:
-        group: 17
-        autoLoadType: 63
-        id:
-          value:
-            rid: 577893893861539933
-    - rid: 577893893861539933
-      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
-      data:
-        value: ca-app-pub-3940256099942544/2247696110
     - rid: 577893893861539934
       type: {class: DefaultBoolValue, ns: HAVIGAME, asm: Assembly-CSharp}
       data:
         value: 1
-    - rid: 577893893861539942
-      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
+    - rid: 976551120067100793
+      type: {class: DefaultBoolValue, ns: HAVIGAME, asm: Assembly-CSharp}
       data:
-        group: 18
-        autoLoadType: 63
-        id:
-          value:
-            rid: 577893893861539943
-    - rid: 577893893861539943
-      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
+        value: 0
+    - rid: 976551120067100794
+      type: {class: DefaultIntValue, ns: HAVIGAME, asm: Assembly-CSharp}
       data:
-        value: ca-app-pub-3940256099942544/1033173712
-    - rid: 3918175796418576454
-      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
-      data:
-        group: 17
-        autoLoadType: 14
-        id:
-          value:
-            rid: 3918175796418576455
-    - rid: 3918175796418576455
-      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
-      data:
-        value: ca-app-pub-1839004489502882/7029230822
+        value: 0

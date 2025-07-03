@@ -1,23 +1,23 @@
 # ninja log v5
-132	4933	7732372524566620	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f5449e4fde52a8bf
-185	1150	7732372486879242	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	f73712045226a654
-160	4588	7732372521210835	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	a3311a29518bf288
-1150	2075	7732372496073949	F:/Unity/Unity_Project/Color Block Jam/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/l6d2a1l5/obj/armeabi-v7a/libswappywrapper.so	cf4b8cf3c944368f
-173	4123	7732372515750585	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	56cc534c6b862b87
-16	4184	7732372517018760	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	3ab498cd0bb6546
-180	4214	7732372517411167	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	26e9daffa69620b2
-142	4127	7732372516093637	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a8f4d5e7b31e226a
-152	4312	7732372518434842	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	77345bf247dc7b77
-167	3988	7732372514770893	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	bf4fc581d5600fcc
-4933	5133	7732372526697347	F:/Unity/Unity_Project/Color Block Jam/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/l6d2a1l5/obj/armeabi-v7a/libgame.so	edceaa1ae0a4294a
-513	938	7732386492770122	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	f73712045226a654
-938	1214	7732386495679219	F:/Unity/Unity_Project/Color Block Jam/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/l6d2a1l5/obj/armeabi-v7a/libswappywrapper.so	cf4b8cf3c944368f
-136	8067	7732386562476166	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	56cc534c6b862b87
-167	8068	7732386562167385	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	bf4fc581d5600fcc
-129	8106	7732386563802086	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	77345bf247dc7b77
-121	8107	7732386562294278	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a8f4d5e7b31e226a
-114	8115	7732386562235707	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	3ab498cd0bb6546
-502	8369	7732386564525339	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	26e9daffa69620b2
-476	8451	7732386567512100	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	a3311a29518bf288
-20	8855	7732386571819396	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f5449e4fde52a8bf
-8856	9450	7732386577943536	F:/Unity/Unity_Project/Color Block Jam/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/l6d2a1l5/obj/armeabi-v7a/libgame.so	edceaa1ae0a4294a
+98	5363	7732404692662549	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f5449e4fde52a8bf
+441	1190	7732404651224785	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	f73712045226a654
+165	5025	7732404689485417	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	a3311a29518bf288
+1190	2048	7732404659654457	F:/Unity/Unity_Project/Color Block Jam/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/l6d2a1l5/obj/armeabi-v7a/libswappywrapper.so	cf4b8cf3c944368f
+105	4412	7732404682916473	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	56cc534c6b862b87
+87	4607	7732404685374207	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	3ab498cd0bb6546
+213	4631	7732404685579735	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	26e9daffa69620b2
+93	4468	7732404683800485	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a8f4d5e7b31e226a
+25	4711	7732404686453866	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	77345bf247dc7b77
+113	4490	7732404684137435	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	bf4fc581d5600fcc
+5363	5686	7732404695868514	F:/Unity/Unity_Project/Color Block Jam/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/l6d2a1l5/obj/armeabi-v7a/libgame.so	edceaa1ae0a4294a
+175	1759	7732416880868209	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	f73712045226a654
+1759	2836	7732416891675011	F:/Unity/Unity_Project/Color Block Jam/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/l6d2a1l5/obj/armeabi-v7a/libswappywrapper.so	cf4b8cf3c944368f
+120	5833	7732416921009269	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	3ab498cd0bb6546
+152	5848	7732416921637016	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	56cc534c6b862b87
+100	5867	7732416921769515	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a8f4d5e7b31e226a
+143	5966	7732416922821797	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	bf4fc581d5600fcc
+167	6091	7732416923644173	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	26e9daffa69620b2
+19	6225	7732416925526766	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	77345bf247dc7b77
+160	6619	7732416929548800	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	a3311a29518bf288
+113	7049	7732416933912174	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f5449e4fde52a8bf
+7049	7492	7732416936489706	F:/Unity/Unity_Project/Color Block Jam/Library/Bee/Android/Prj/Mono2x/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/l6d2a1l5/obj/armeabi-v7a/libgame.so	edceaa1ae0a4294a

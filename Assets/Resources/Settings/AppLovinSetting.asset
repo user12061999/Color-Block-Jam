@@ -12,20 +12,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dba98d42dc183a43aa65ffdcc20af73, type: 3}
   m_Name: AppLovinSetting
   m_EditorClassIdentifier: 
-  sdkKey: 
-  appOpenAdIds: []
-  rewardedAdIds: []
-  interstitialAdIds: []
-  bannerAdIds: []
-  mediumRectangleAdIds: []
-  initializeBannerAdPosition: 6
-  adaptiveBanner:
+  enable:
     value:
-      rid: 1073519859792609285
+      rid: 976551113714040834
+  sdkKey: tLDN-4zvZMQH-2GVQZJDCM9m64JGikmI2deEhULNkz2EALdgz3SnrbOlIHXkqZvqIg5FCvD5hodyKRk4FQle9h
+  appOpenAdIds:
+  - rid: 976551113714040918
+  rewardedAdIds:
+  - rid: 976551113714040916
+  interstitialAdIds:
+  - rid: 976551113714040914
+  bannerAdIds:
+  - rid: 976551113714040836
+  mediumRectangleAdIds: []
+  bannerAdSize:
+    type: 4
+    width: 0
+    height: 0
   references:
     version: 2
     RefIds:
-    - rid: 1073519859792609285
+    - rid: 976551113714040834
       type: {class: DefaultBoolValue, ns: HAVIGAME, asm: Assembly-CSharp}
       data:
         value: 1
+    - rid: 976551113714040836
+      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
+      data:
+        group: 17
+        autoLoadType: 62
+        id:
+          value:
+            rid: 976551113714040837
+    - rid: 976551113714040837
+      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
+      data:
+        value: 93f74882626cc99f
+    - rid: 976551113714040914
+      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
+      data:
+        group: 17
+        autoLoadType: 62
+        id:
+          value:
+            rid: 976551113714040915
+    - rid: 976551113714040915
+      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
+      data:
+        value: caa30d3e397cc8d1
+    - rid: 976551113714040916
+      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
+      data:
+        group: 17
+        autoLoadType: 62
+        id:
+          value:
+            rid: 976551113714040917
+    - rid: 976551113714040917
+      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
+      data:
+        value: 4d89f0c0f0b96879
+    - rid: 976551113714040918
+      type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
+      data:
+        group: 17
+        autoLoadType: 62
+        id:
+          value:
+            rid: 976551113714040919
+    - rid: 976551113714040919
+      type: {class: DefaultStringValue, ns: HAVIGAME, asm: Assembly-CSharp}
+      data:
+        value: db5d2e10fe7923c5

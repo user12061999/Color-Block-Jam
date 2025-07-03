@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: AdvertisingSettings
   m_EditorClassIdentifier: 
   serviceProviders:
-  - rid: 577893893861539910
+  - rid: 976551120067100800
+  forceRunOnMainTheard: 1
+  saveData: 1
+  saveId: advertising
+  removeAdFormats: 11
   references:
     version: 2
     RefIds:
-    - rid: 577893893861539910
-      type: {class: AdMobServiceProvider, ns: HAVIGAME.Plugins.AdMob, asm: Assembly-CSharp}
+    - rid: 976551120067100800
+      type: {class: AppLovinAdServiceProvider, ns: HAVIGAME.Plugins.AppLovin, asm: Assembly-CSharp}
       data: 

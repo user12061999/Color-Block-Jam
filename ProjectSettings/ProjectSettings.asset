@@ -145,8 +145,8 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 2c327a9c44e7efe45845109694a36fc8, type: 2}
   - {fileID: 3427900968081292689, guid: 518a881be7ccc1e41b8e38d0d293ace4, type: 2}
+  - {fileID: 11400000, guid: 2c327a9c44e7efe45845109694a36fc8, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -822,7 +822,7 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN;ANALYTICS;CRASHLYTICS;REMOTE_CONFIG;FIREBASE;FIREBASE_ANALYTICS;FIREBASE_CRASHLYTICS;FIREBASE_REMOTE_CONFIG;APPSFLYER
+    Android: DOTWEEN;ANALYTICS;CRASHLYTICS;REMOTE_CONFIG;FIREBASE;FIREBASE_ANALYTICS;FIREBASE_CRASHLYTICS;FIREBASE_REMOTE_CONFIG;APPSFLYER;ADMOB;ADVERTISING;APPLOVIN;PRIVACY
     EmbeddedLinux: DOTWEEN
     GameCoreScarlett: DOTWEEN
     GameCoreXboxOne: DOTWEEN

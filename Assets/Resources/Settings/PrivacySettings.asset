@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PrivacySettings
   m_EditorClassIdentifier: 
   serviceProvider:
-    rid: 1073519859792609283
+    rid: 976551120067100801
   references:
     version: 2
     RefIds:
-    - rid: 1073519859792609283
+    - rid: 976551120067100801
       type: {class: AdMobPrivacyServiceProvider, ns: HAVIGAME.Plugins.AdMob, asm: Assembly-CSharp}
       data: 
