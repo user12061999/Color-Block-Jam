@@ -151,10 +151,25 @@ public class HomePanel : UITab
 
     private void PlayGame()
     {
-        int levelToPlay = currentLevel;
-        Debug.Log(levelToPlay);
-        GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(levelToPlay);
-        ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Game);
+        bool isEnought = GameData.Inventory.IsEnought(new ItemStack(ItemID.Heart, 1));
+        if (!isEnought)
+        {
+            if (UIManager.HasInstance)
+            {
+                string title = "Hearts!";
+                string message = "You don't have enough hearts to play. Do you want to go to the shop?";
+                UIManager.Instance.Push<DialogPanel>().Dialog(title, message);
+            }
+        }
+        else
+        {
+            int levelToPlay = currentLevel;
+            Debug.Log(levelToPlay);
+            GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(levelToPlay);
+            ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Game);
+        }
+
+
     }
 
     private void OpenSettings()
