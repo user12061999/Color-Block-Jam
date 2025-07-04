@@ -26,7 +26,7 @@ MonoBehaviour:
   - rid: 976551113714040836
   mediumRectangleAdIds: []
   bannerAdSize:
-    type: 4
+    type: 0
     width: 0
     height: 0
   references:
@@ -40,7 +40,7 @@ MonoBehaviour:
       type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
       data:
         group: 17
-        autoLoadType: 62
+        autoLoadType: 8388670
         id:
           value:
             rid: 976551113714040837
@@ -52,7 +52,7 @@ MonoBehaviour:
       type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
       data:
         group: 17
-        autoLoadType: 62
+        autoLoadType: 8388670
         id:
           value:
             rid: 976551113714040915
@@ -64,7 +64,7 @@ MonoBehaviour:
       type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
       data:
         group: 17
-        autoLoadType: 62
+        autoLoadType: 8388670
         id:
           value:
             rid: 976551113714040917
@@ -76,7 +76,7 @@ MonoBehaviour:
       type: {class: SingleAdId, ns: HAVIGAME.Services.Advertisings, asm: Assembly-CSharp}
       data:
         group: 17
-        autoLoadType: 62
+        autoLoadType: 8388670
         id:
           value:
             rid: 976551113714040919

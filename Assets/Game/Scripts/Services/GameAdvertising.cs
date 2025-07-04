@@ -7,6 +7,7 @@ using HAVIGAME.Services.IAP;
 
 public class GameAdvertising : Singleton<GameAdvertising> {
     public static readonly AdFilter defaultAdFilter = new AdFilter(AdNetwork.All, AdGroup.Group_1 | AdGroup.Tier_All);
+    public static readonly AdFilter allAdFilter = new AdFilter(AdNetwork.All, AdGroup.Group_All | AdGroup.Tier_All);
     public static readonly AdFilter defaultCanvasNativeImmersiveAdFilter = new AdFilter(AdNetwork.All, AdGroup.Group_2 | AdGroup.Tier_All);
     public static readonly AdFilter appOpenInterstitialAdFilter = new AdFilter(AdNetwork.All, AdGroup.Group_2 | AdGroup.Tier_All);
     public static readonly AdSizeOption defaultNativeOverlayAdSize = new AdSizeOption(AdSizeType.AnchoredAdaptive);

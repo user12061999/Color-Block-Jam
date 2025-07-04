@@ -113,7 +113,7 @@ public class ClassicLevelController : LevelController
         gamePanel.SetCountdownTime(generator.Duration);
         gamePanel.Interactable = true;
         countBuyTime = 0;
-
+        GameAdvertising.TryShowBannerAd(GameAdvertising.GameAdPosition.BottomCenter);
         int seconds = generator.Duration;
 
 
