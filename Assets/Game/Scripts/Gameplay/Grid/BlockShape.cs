@@ -288,6 +288,7 @@ public class BlockShape : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (isFreeze) return;
         isDragging = true;
         originalPosition = transform.position;
         originalGridPos = CurrentOrigin;
@@ -317,7 +318,7 @@ public class BlockShape : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (!isDragging) return;
+        if (!isDragging || isFreeze) return;
 
         Vector3 mouseWorld = GetMouseWorldByRay() + dragOffset;
         mouseWorld.z = dragZ;
@@ -370,6 +371,7 @@ public class BlockShape : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (isFreeze) return;
         isDragging = false;
         grid.ClearAllPreviews();
         foreach (var VARIABLE in boxColliders)
