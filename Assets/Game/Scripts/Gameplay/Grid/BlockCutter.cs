@@ -49,7 +49,10 @@ public class BlockCutter : MonoBehaviour
             if (IsFullyInside(block, center, rotation) && CanCut(block) && !block.IsCutting)
             {
                 block.IsCutting = true;
-                grid.SpawnSubBlock(block);
+                if (block.HasSubShape)
+                {
+                    grid.SpawnSubBlock(block);
+                }
                 ClassicLevelController.instance.BlockShapeSelected = null;
                 CutBlock(block, () =>
                 {

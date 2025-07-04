@@ -11,6 +11,8 @@ public class GamePanel : UIFrame
     [SerializeField] private TextMeshProUGUI txtLevel;
     [SerializeField] private Button btnPause;
     [SerializeField] private TextMeshProUGUI txtCountDownTime;
+    [SerializeField] private Image circle,rectangle,pause;
+    [SerializeField] private Sprite[] circleSprites, rectangleSprites,pauseSprites;
     private void Start()
     {
         btnPause.onClick.AddListener(PauseGame);
@@ -42,8 +44,22 @@ public class GamePanel : UIFrame
     protected override void OnShow(bool instant = false)
     {
         base.OnShow(instant);
-
         txtLevel.text = string.Format("LEVEL{0}", GameController.Instance.LoadLevelOption.Level);
+        int currentLevel = GameData.Classic.LevelUnlocked;
+        string paths = $"LevelSO/Level_{currentLevel}";
+        ConfigLevel configLevel = Resources.Load<ConfigLevel>(paths);
+        if (configLevel.difficulty== DifficultyLevel.Easy)
+        {
+            circle.sprite = circleSprites[0];
+            rectangle.sprite = rectangleSprites[0];
+            pause.sprite = pauseSprites[0];
+        }
+        else if (configLevel.difficulty == DifficultyLevel.Hard)
+        {
+            circle.sprite = circleSprites[1];
+            rectangle.sprite = rectangleSprites[1];
+            pause.sprite = pauseSprites[1];
+        }
     }
 
     protected override void OnBack()

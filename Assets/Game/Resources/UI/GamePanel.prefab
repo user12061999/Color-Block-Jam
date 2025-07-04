@@ -664,6 +664,18 @@ MonoBehaviour:
   txtLevel: {fileID: 5660693911692175705}
   btnPause: {fileID: 8152836815028075887}
   txtCountDownTime: {fileID: 2148872539274985494}
+  circle: {fileID: 2105502839064258746}
+  rectangle: {fileID: 3275902960685883666}
+  pause: {fileID: 688515620913487204}
+  circleSprites:
+  - {fileID: 21300000, guid: 47bdfa066e8a1f74e90633a1e039065e, type: 3}
+  - {fileID: 21300000, guid: 7e0324e42dc62f44bb4ab40a6bfaecb8, type: 3}
+  rectangleSprites:
+  - {fileID: 21300000, guid: a928407d2d097044caf44aae5675472b, type: 3}
+  - {fileID: 21300000, guid: 3559ebd1d6e7db74e84df8eeab7a2b95, type: 3}
+  pauseSprites:
+  - {fileID: 21300000, guid: f5ae3dd5d754fef419cdb8a6496713d3, type: 3}
+  - {fileID: 21300000, guid: 05d7f36f103d2cd43a41e67d059aca24, type: 3}
 --- !u!1 &6474908243669020494
 GameObject:
   m_ObjectHideFlags: 0

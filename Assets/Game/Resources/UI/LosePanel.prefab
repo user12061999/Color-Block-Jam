@@ -1399,6 +1399,7 @@ GameObject:
   - component: {fileID: 904379569308240419}
   - component: {fileID: 2899460968928659225}
   - component: {fileID: 7439427061891805775}
+  - component: {fileID: 5368142183586131464}
   m_Layer: 5
   m_Name: LosePanel
   m_TagString: Untagged
@@ -1538,6 +1539,27 @@ MonoBehaviour:
     amount: 40
   btnReviveAds: {fileID: 8371591537202016289}
   btnReviveGold: {fileID: 1519167257969811849}
+--- !u!65 &5368142183586131464
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5914414404464685533}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4000, y: 4000, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6068847547901473654
 GameObject:
   m_ObjectHideFlags: 0

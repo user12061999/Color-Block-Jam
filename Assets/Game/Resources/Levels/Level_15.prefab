@@ -14627,7 +14627,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d30d4cfada9323e4994032b06c63528a, type: 2}
     - target: {fileID: 1520051857356232501, guid: edd9400fc3d140349aa8897e3da04514, type: 3}
       propertyPath: m_Center.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1714861145607388094, guid: edd9400fc3d140349aa8897e3da04514, type: 3}
       propertyPath: m_IsActive
@@ -14635,6 +14635,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1769124107313335509, guid: edd9400fc3d140349aa8897e3da04514, type: 3}
       propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769124107313335509, guid: edd9400fc3d140349aa8897e3da04514, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3285507229826784610, guid: edd9400fc3d140349aa8897e3da04514, type: 3}
@@ -14873,6 +14877,10 @@ PrefabInstance:
       propertyPath: subBlockColorData
       value: 
       objectReference: {fileID: 11400000, guid: 99b52704360f04241be5d88d256c1e1a, type: 2}
+    - target: {fileID: 4243153349686442083, guid: 4a426125eae17264bb1eccf274a13c3f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b41708368277644a853854baabb0d1a, type: 2}
     - target: {fileID: 5378849505681992250, guid: 4a426125eae17264bb1eccf274a13c3f, type: 3}
       propertyPath: m_IsActive
       value: 1

@@ -1602,6 +1602,7 @@ GameObject:
   - component: {fileID: 904379569308240419}
   - component: {fileID: 2899460968928659225}
   - component: {fileID: 3474879041073147674}
+  - component: {fileID: 8174166076220522675}
   m_Layer: 5
   m_Name: WinPanel
   m_TagString: Untagged
@@ -1739,6 +1740,27 @@ MonoBehaviour:
   rewardWithAdsView: {fileID: 7061628570417899498}
   rewardViewPrefab: {fileID: 0}
   rewardViewContainer: {fileID: 0}
+--- !u!65 &8174166076220522675
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5914414404464685533}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4000, y: 4000, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6150093894093095781
 GameObject:
   m_ObjectHideFlags: 0

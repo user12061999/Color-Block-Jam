@@ -60,8 +60,8 @@ public class GridManager : MonoBehaviour
     {
         if (blockShape.SubBlockColorData)
         {
-            Instantiate(blockShape, blockParent).SetColorData(
-                blockShape.SubBlockColorData);
+            var a=Instantiate(blockShape, blockParent);
+            a.OnSpawnSubBlock();
             PlaceBlock(blockShape.PreviewOrigin, blockShape);
         }
     }

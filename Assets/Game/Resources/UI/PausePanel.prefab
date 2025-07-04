@@ -4391,6 +4391,7 @@ GameObject:
   - component: {fileID: 4475438744443227087}
   - component: {fileID: 8181077629422347580}
   - component: {fileID: 6711577312608167342}
+  - component: {fileID: 2623217119334251598}
   m_Layer: 5
   m_Name: PausePanel
   m_TagString: Untagged
@@ -4529,6 +4530,27 @@ MonoBehaviour:
   btnBack: {fileID: 426574024327963098}
   panelReplay: {fileID: 5031089213467281243}
   textLevel: {fileID: 1786239674029099825}
+--- !u!65 &2623217119334251598
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7164390028741366843}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4000, y: 4000, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7310361407551995579
 GameObject:
   m_ObjectHideFlags: 0

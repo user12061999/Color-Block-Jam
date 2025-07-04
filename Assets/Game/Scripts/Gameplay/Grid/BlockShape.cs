@@ -28,6 +28,7 @@ public class BlockShape : MonoBehaviour
 
 
     [SerializeField] private bool hasSubShape = false;
+    [SerializeField] public bool HasSubShape =>hasSubShape;
     [SerializeField] private GameObject subObject;
     [SerializeField] private BlockColorData subBlockColorData;
     public BlockColorData SubBlockColorData => subBlockColorData;
@@ -95,7 +96,13 @@ public class BlockShape : MonoBehaviour
         {
             UpdateTextFreeze("");
         }
+    }
 
+    public void OnSpawnSubBlock()
+    {
+        hasSubShape = false;
+        subObject.SetActive(false);
+        SetColorData(subBlockColorData);
     }
     void UpdateTextFreeze(string text)
     {
