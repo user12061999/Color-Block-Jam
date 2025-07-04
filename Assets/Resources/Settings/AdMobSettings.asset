@@ -49,7 +49,7 @@ MonoBehaviour:
     - rid: 976551120067100793
       type: {class: DefaultBoolValue, ns: HAVIGAME, asm: Assembly-CSharp}
       data:
-        value: 0
+        value: 1
     - rid: 976551120067100794
       type: {class: DefaultIntValue, ns: HAVIGAME, asm: Assembly-CSharp}
       data:
