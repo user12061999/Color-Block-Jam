@@ -41,7 +41,7 @@ public class GridManager : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
+        
     }
 
     public void SetPreviewAt(Vector2Int origin, BlockShape block, bool valid)

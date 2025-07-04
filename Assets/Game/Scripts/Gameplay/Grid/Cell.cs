@@ -34,7 +34,7 @@ public class Cell : MonoBehaviour
 
     private void UpdateVisual()
     {
-        // Giả sử bạn có SpriteRenderer
+        /*// Giả sử bạn có SpriteRenderer
         if (meshRenderer == null) return;
 
         if (previewState == CellPreviewState.Valid)
@@ -44,6 +44,6 @@ public class Cell : MonoBehaviour
         else if (!IsOccupied)
             meshRenderer.sharedMaterial= baseMaterial; // trống
         else
-            meshRenderer.sharedMaterial= greenMaterial; // occupied (nhẹ)
+            meshRenderer.sharedMaterial= greenMaterial; // occupied (nhẹ)*/
     }
 }

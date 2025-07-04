@@ -105,6 +105,7 @@ public class ClassicLevelController : LevelController
     protected override void OnStartLevel()
     {
         base.OnStartLevel();
+       
         CameraController.Instance.UpdateCamera(gridBoundsCalculator.gridBounds);
         startedTime = Time.time;
         TotalMove = 0;
