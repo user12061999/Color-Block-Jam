@@ -76,7 +76,7 @@ MonoBehaviour:
   - {fileID: 7218219675562142875}
   - {fileID: 2555644837343743837}
   - {fileID: 7737578064635213442}
-  isFreeze: 1
+  isFreeze: 0
   numFreeze: 0
   textFreeze: {fileID: 6704730510266870700}
   colorData: {fileID: 11400000, guid: 99b52704360f04241be5d88d256c1e1a, type: 2}
@@ -256,7 +256,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07a39321c36bfbf40a87cdf2988b2ee3, type: 2}
+  - {fileID: 2100000, guid: 3b41708368277644a853854baabb0d1a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 424d0e58b080c234caef5e0a895f721f, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 0c730cece2d08114f9a3e77f28022f53, type: 2}
