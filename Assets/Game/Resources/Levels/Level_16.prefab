@@ -1915,8 +1915,8 @@ MonoBehaviour:
   gridManager: {fileID: 5577628829992106110}
   calculateOnStart: 1
   gridBounds:
-    m_Center: {x: 4, y: 5, z: 0}
-    m_Extent: {x: 5, y: 6, z: 0}
+    m_Center: {x: 4, y: 6, z: 0}
+    m_Extent: {x: 5, y: 7, z: 0}
 --- !u!114 &1183657314318284016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10283,7 +10283,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 175a7a9775c694b4395e9415bb5a2783, type: 2}
     - target: {fileID: 7664851006806441872, guid: 4eee8411ab6bf9a41b331619cd9b96b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7664851006806441872, guid: 4eee8411ab6bf9a41b331619cd9b96b0, type: 3}
       propertyPath: m_LocalPosition.y
