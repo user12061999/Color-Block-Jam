@@ -123,7 +123,7 @@ public class HomePanel : UITab
     protected override void OnShow(bool instant = false)
     {
         base.OnShow(instant);
-
+        GameAdvertising.TryHideBannerAd();
         int levelUnlocked = GameData.Classic.LevelUnlocked;
         ShowLevel(levelUnlocked);
 
