@@ -67,13 +67,17 @@ public class HomePanel : UITab
 
         if (difficultyDatas != null)
         {
+            TextMeshProUGUI btnText = btnPlay.GetComponentInChildren<TextMeshProUGUI>();
+            Image btnImage = btnPlay.GetComponent<Image>();
             if (difficultyDatas.difficulty == DifficultyLevel.Hard)
             {
-                btnPlay.GetComponent<Image>().sprite = arraySpriteButton[1];
+                btnImage.sprite = arraySpriteButton[1];
+                btnText.alignment = TextAlignmentOptions.Top;
             }
             else
             {
-                btnPlay.GetComponent<Image>().sprite = arraySpriteButton[0];
+                btnImage.sprite = arraySpriteButton[0];
+                btnText.alignment = TextAlignmentOptions.Center;
             }
         }
 
