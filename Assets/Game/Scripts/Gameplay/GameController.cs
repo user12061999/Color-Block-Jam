@@ -50,6 +50,7 @@ public class GameController : Singleton<GameController> {
     }
 
     public bool DestroyGame() {
+        GameAdvertising.TryHideBannerAd();
         if (CurrentState != GameStates.Playing) {
             Log.Debug($"[GameController] Destroy game failed! current state = {CurrentState}");
             return false;

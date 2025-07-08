@@ -8,40 +8,42 @@ public class PausePanel : UIFrame
 {
     [Header("[References]")]
     [SerializeField] private Button btnHome;
-    [SerializeField] private Button btnSkip;
-    [SerializeField] private Button btnPause;
-    [SerializeField] private Button btnRetry;
-    [SerializeField] private Button btnBack;
+    [SerializeField] private Button btnReplay;
+    [SerializeField] private Button btnOkReplay;
+    [SerializeField] private Button btnBackToSetting;
+    [SerializeField] private Button btnOkHome;
 
-    [SerializeField] private GameObject panelReplay;
+    [SerializeField] private GameObject panelLoseHeart;
     [SerializeField] private TextMeshProUGUI textLevel;
     int index = 0; // 0: Home, 1: Retry
 
     private void Start()
     {
-        OnStart();
-        btnHome.onClick.AddListener(QuitToHome);
-        btnSkip.onClick.AddListener(SkipGame);
-        btnPause.onClick.AddListener(BtnPause);
-        btnRetry.onClick.AddListener(RestartGame);
-        btnBack.onClick.AddListener(ButtonBack);
+        btnHome.onClick.AddListener(BtnHome);
+        btnReplay.onClick.AddListener(BtnReplay);
+        btnOkReplay.onClick.AddListener(SlectRelayOrBackToHome);
+        btnOkHome.onClick.AddListener(SlectRelayOrBackToHome);
+        btnBackToSetting.onClick.AddListener(ButtonBackToSetting);
     }
-    void OnStart()
+
+    protected override void OnShow(bool instant = false)
     {
-        panelReplay.SetActive(false);
+        base.OnShow(instant);
+        panelLoseHeart.SetActive(false);
         SetTextLevel();
     }
+
     void SetTextLevel()
     {
         int level = GameController.Instance.LoadLevelOption.Level;
         textLevel.text = string.Format("Level {0}", level);
     }
-    private void QuitToHome()
+    private void BtnHome()
     {
-        // GameController.Instance.DestroyGame();
-        // ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Home);
         index = 0;
-        panelReplay.SetActive(true);
+        btnOkReplay.gameObject.SetActive(false);
+        btnOkHome.gameObject.SetActive(true);
+        panelLoseHeart.SetActive(true);
     }
 
     private void SkipGame()
@@ -53,12 +55,12 @@ public class PausePanel : UIFrame
         GameSceneController.pendingLoadLevelOption = LoadLevelOption.Create(levelToPlay);
         ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Game);
     }
-    private void ButtonBack()
+    private void ButtonBackToSetting()
     {
-        panelReplay.SetActive(false);
+        panelLoseHeart.SetActive(false);
     }
 
-    private void RestartGame()
+    private void SlectRelayOrBackToHome()
     {
         bool isEnought = GameData.Inventory.IsEnought(new ItemStack(ItemID.Heart, 1));
         if (!isEnought)
@@ -70,18 +72,16 @@ public class PausePanel : UIFrame
                 string message;
                 if (index == 0)
                 {
-                    //HOME
-                    title = "Home!";
-                    message = "You don't have enough hearts to continue. Do you want to go home?";
+                    GameController.Instance.DestroyGame();
+                    ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Home);
                 }
                 else
                 {
                     //RETRY
                     title = "Retry!";
-                    message = "You don't have enough hearts to retry. Do you want to retry?";
+                    message = "You don't have enough hearts to retry!";
+                    UIManager.Instance.Push<DialogPanel>().Dialog(title, message);
                 }
-
-                UIManager.Instance.Push<DialogPanel>().Dialog(title, message);
             }
         }
         else
@@ -101,15 +101,12 @@ public class PausePanel : UIFrame
                 ScenesManager.Instance.LoadSceneAsyn(GameScene.ByIndex.Game);
             }
         }
-
-
-
-
-
     }
-    private void BtnPause()
+    private void BtnReplay()
     {
         index = 1; // Set index to 1 for Retry
-        panelReplay.SetActive(true);
+        btnOkReplay.gameObject.SetActive(true);
+        btnOkHome.gameObject.SetActive(false);
+        panelLoseHeart.SetActive(true);
     }
 }

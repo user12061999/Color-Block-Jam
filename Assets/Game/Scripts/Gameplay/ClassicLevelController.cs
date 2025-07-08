@@ -105,11 +105,10 @@ public class ClassicLevelController : LevelController
     protected override void OnStartLevel()
     {
         base.OnStartLevel();
-       
         CameraController.Instance.UpdateCamera(gridBoundsCalculator.gridBounds);
         startedTime = Time.time;
         TotalMove = 0;
-        GameData.Inventory.Remove(new ItemStack(ItemID.Heart, 1), "lose");
+        GameData.Inventory.Remove(new ItemStack(ItemID.Heart, 1));
         gamePanel = UIManager.Instance.Push<GamePanel>();
         gamePanel.SetCountdownTime(generator.Duration);
         gamePanel.Interactable = true;

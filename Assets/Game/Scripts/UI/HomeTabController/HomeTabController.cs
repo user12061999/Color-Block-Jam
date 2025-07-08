@@ -16,6 +16,7 @@ public class HomeTabController : UITabManager {
         }
 
         runner.Run(null);
+        GameAdvertising.TryHideBannerAd();
     }
 
     protected override void OnBack() {
