@@ -157,6 +157,12 @@ public class ClassicLevelController : LevelController
         timer.Stop();
         gamePanel.Interactable = false;
         Time.timeScale = 1;
+        int heartAmount = GameData.Inventory.GetCount(ItemID.Heart);
+        if (heartAmount<ConfigDatabase.Instance.MaxHeart)
+        {
+            GameData.Inventory.Add(new ItemStack(ItemID.Heart,1));
+        }
+        
         StopShowInterstitialAd();
         DOVirtual.DelayedCall(1.5f, () =>
         {

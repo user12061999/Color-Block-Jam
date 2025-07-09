@@ -16,7 +16,7 @@ MonoBehaviour:
   runInBackground: 0
   targetFrameRate: 60
   multiTouchEnabled: 1
-  logLevel: 0
+  logLevel: 3
   launcher:
     rid: 1073519635238748167
   references:

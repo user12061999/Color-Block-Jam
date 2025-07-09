@@ -405,6 +405,11 @@ public class GameAdvertising : Singleton<GameAdvertising> {
             return false;
         }
 
+        if (GameRemoteConfig.InterstitialAdLevelMin > GameData.Classic.LevelUnlocked) 
+        {
+            Log.Warning("[GameAds] Interstitial ad is not available for current level: " + GameData.Classic.LevelUnlocked);
+            return false;
+        }
 
         if (AdvertisingManager.ShowInterstitialAd(onCompleted, GetCurrentPlacement(), defaultAdFilter)) {
             lastTimeInterstitialAdShowed = Time.time;
